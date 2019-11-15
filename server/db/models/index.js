@@ -1,4 +1,8 @@
 const User = require('./user')
+const Route = require('./route')
+const Timeline = require('./timeline')
+const Description = require('./description')
+const Date = require('./date')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -13,6 +17,21 @@ const User = require('./user')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+// Route.belongsTo(User, {through: checkedRoute})
+User.hasMany(Route)
+
+Route.hasMany(Timeline)
+
+// Description.belongsTo(Route)
+
+Timeline.hasOne(Date)
+// Timeline.belongsToMany(Route)
+
 module.exports = {
-  User
+  User,
+  Route,
+  Timeline,
+  Description,
+  Date
 }

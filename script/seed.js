@@ -1,16 +1,39 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {
+  User,
+  Timeline,
+  Date,
+  Description,
+  Route
+} = require('../server/db/models')
+const {users, timelines, dates, descriptions, routes} = require('./dummyData')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const usersSeed = await Promise.all(users.map(user => User.create(user)))
+  console.log(`seeded ${usersSeed.length} users`)
+
+  const timelineSeed = await Promise.all(
+    timelines.map(timepoint => Timeline.create(timepoint))
+  )
+  console.log(`seeded ${timelineSeed.length} timepoints`)
+
+  const descriptionSeed = await Promise.all(
+    descriptions.map(des => Description.create(des))
+  )
+  console.log(`seeded ${descriptionSeed.length} descriptions`)
+
+  const routesSeed = await Promise.all(routes.map(route => Route.create(route)))
+  console.log(`seeded ${routesSeed.length} routes`)
+
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)

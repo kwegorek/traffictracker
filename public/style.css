@@ -19,3 +19,29 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.footer {
+  background: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.footer-wrap {
+  margin-left: 25%;
+}
+
+.footer-wrap ul,
+li {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+#allroutes-wrapper {
+  border: solid;
+}
+
+#traffic-wrapper {
+  margin-top: 10px;
+  border: solid;
+}
