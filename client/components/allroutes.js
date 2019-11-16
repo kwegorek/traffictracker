@@ -12,30 +12,16 @@ class AllRoutes extends React.Component {
 
     this.state = {
       start: '',
-      end: '',
-      routes: [
-        {
-          id: 1,
-          start: [-74.007624, 40.705137],
-          end: [-74.007108, 40.707894],
-          userId: 1
-        },
-        {
-          id: 2,
-          start: [-73.999542, 40.715317],
-          end: [-74.007108, 40.707894],
-          userId: 1
-        }
-      ]
+      end: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log('mounting')
 
-    await this.props.displayRoutes()
+    this.props.displayRoutes()
 
     console.log(this.props, 'props')
   }
@@ -54,15 +40,10 @@ class AllRoutes extends React.Component {
       start: evt.target.start.value,
       end: evt.target.end.value
     }
-
-    console.log(location, 'location  - - - - - - >')
-
     addRouteThunk(location)
   }
 
   render() {
-    const routes = this.state.routes
-
     return (
       <React.Fragment>
         <div>
@@ -90,8 +71,8 @@ class AllRoutes extends React.Component {
             </form>
             <h1>All routes:</h1>
             <div>
-              {this.state.routes
-                ? this.state.routes.map((route, indx) => {
+              {this.props.routes
+                ? this.props.routes.map((route, indx) => {
                     return <SingleRoute key={indx} route={route} />
                   })
                 : null}{' '}
@@ -105,7 +86,7 @@ class AllRoutes extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    routes: state.routes
+    routes: state.route.routes
   }
 }
 

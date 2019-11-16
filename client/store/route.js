@@ -6,7 +6,7 @@ import store from '.'
  * ACTION TYPES
  */
 
-const GET_ROUTE = 'GET_ROUTE'
+const GET_ONE_ROUTE = 'GET_ONE_ROUTE'
 const GET_ROUTES = 'GET_ROUTES'
 const ADD_ROUTE = 'ADD_ROUTE'
 const REMOVE_ROUTE = 'REMOVE_ROUTE'
@@ -14,30 +14,15 @@ const REMOVE_ROUTE = 'REMOVE_ROUTE'
 /**
  * INITIAL STATE
  */
-const initialState = {
-  routes: [
-    {
-      id: 1,
-      start: [-74.007624, 40.705137],
-      end: [-74.007108, 40.707894],
-      userId: 1
-    },
-    {
-      id: 2,
-      start: [-73.999542, 40.715317],
-      end: [-74.007108, 40.707894],
-      userId: 1
-    }
-  ]
-}
+const initialState = {}
 
 /**
  * ACTION CREATORS
  */
 // const getRoutes = routes => ({type: GET_ROUTES, routes})
-const getRoutes = () => ({type: GET_ROUTES})
+const getRoutes = routes => ({type: GET_ROUTES, routes})
 
-const getOneRoute = route => ({type: GET_ROUTE, route})
+const getOneRoute = route => ({type: GET_ONE_ROUTE, route})
 
 export const addRoute = added => ({type: ADD_ROUTE, added})
 
@@ -49,7 +34,7 @@ const deleteRoute = routeid => ({type: REMOVE_ROUTE, routeid})
 export const displayRoutes = () => async dispatch => {
   try {
     const {data} = await axios.get('./api/routes')
-    // console.log('routes ----------', data)
+    console.log('routes ----------', data)
 
     dispatch(getRoutes(data))
   } catch (err) {
@@ -77,7 +62,7 @@ export const addRouteThunk = route => async dispatch => {
     const {data} = await axios.post('./api/routes', route)('route posted')
     dispatch(addRoute(data))
   } catch (error) {
-    console.error(err)
+    console.error(error)
   }
 }
 
@@ -86,7 +71,7 @@ export const deleteRouteThunk = routeid => async dispatch => {
     console.log(routeid, '------------')
     const {data} = await axios.delete(`./api/routes/${routeid}`)
 
-    console.log('show one', data)
+    console.log('delete one', data)
 
     dispatch(deleteRoute(routeid))
   } catch (err) {
@@ -98,13 +83,11 @@ export const deleteRouteThunk = routeid => async dispatch => {
  * REDUCER
  */
 export default function(state = initialState, action) {
-  console.log(action.type)
   switch (action.type) {
     case GET_ROUTES:
-      return state.routes
-    case GET_ONE:
-      console.log('----------->')
-      return action.route
+      return {...state, routes: action.routes}
+    case GET_ONE_ROUTE:
+      return {...state, route: action.route}
     case ADD_ROUTE:
       let newState = state.routes.concat(action.added)
       return {...state, routes: newState}

@@ -4,13 +4,8 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const routes = await Route.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['start', 'end']
-    })
-    console.log(routes, 'routes')
+    const routes = await Route.findAll()
+
     res.json(routes)
   } catch (err) {
     next(err)
@@ -30,7 +25,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:routeid', async (req, res, next) => {
   try {
-    console.log('--------', req.params.routeid)
+    console.log('------req.params.id--', req.params.routeid)
 
     const one_routes = await Route.findByPk(req.params.routeid)
 
