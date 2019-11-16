@@ -1,14 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {
-  User,
-  Timeline,
-  Date,
-  Description,
-  Route
-} = require('../server/db/models')
-const {users, timelines, dates, descriptions, routes} = require('./dummyData')
+const {User, Route, TrafficSample} = require('../server/db/models')
+const {users, routes, trafficsamples} = require('./dummyData')
 
 async function seed() {
   await db.sync({force: true})
@@ -17,26 +11,21 @@ async function seed() {
   const usersSeed = await Promise.all(users.map(user => User.create(user)))
   console.log(`seeded ${usersSeed.length} users`)
 
-  const timelineSeed = await Promise.all(
-    timelines.map(timepoint => Timeline.create(timepoint))
-  )
-  console.log(`seeded ${timelineSeed.length} timepoints`)
-
-  const descriptionSeed = await Promise.all(
-    descriptions.map(des => Description.create(des))
-  )
-  console.log(`seeded ${descriptionSeed.length} descriptions`)
-
   const routesSeed = await Promise.all(routes.map(route => Route.create(route)))
   console.log(`seeded ${routesSeed.length} routes`)
+
+  const trafficsamplesSeed = await Promise.all(
+    trafficsamples.map(timepoint => TrafficSample.create(timepoint))
+  )
+  console.log(`seeded ${trafficsamplesSeed.length} trafficsamples`)
 
   // const users = await Promise.all([
   //   User.create({email: 'cody@email.com', password: '123'}),
   //   User.create({email: 'murphy@email.com', password: '123'})
   // ])
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  // console.log(`seeded ${users.length} users`)
+  // console.log(`seeded successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.

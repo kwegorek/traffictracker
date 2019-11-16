@@ -2,34 +2,44 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {Welcome} from '../components'
 
-/**
- * COMPONENT
- */
+let traffic_back =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mZVVLVbddJc1EDouq7D9o5F60FNPEch4CUugn9xJ88u1t4Tv&s'
+
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+    <div className="login-wrapper">
+      <div className="login-container">
+        {/* <div>
+        <Welcome/>
+      </div> */}
+        <div className="login-col">
+          <form className="form-container" onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <button type="submit">{displayName}</button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+        <div className="login-col logincol2">
+          <a href="/auth/google">{displayName} with Google</a>
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      </div>
     </div>
   )
 }
