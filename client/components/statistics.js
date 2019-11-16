@@ -1,68 +1,54 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis'
-import {displayRoutes} from '../store/route'
+import {displayTrafficSamples} from '../store/trafficsample'
 
 class Statistics extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      locaction: {
-        loc1: [74, 70]
-      },
-      start: '',
-      end: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
+  constructor(props) {
+    super(props)
   }
 
-  async componentDidMount() {
-    console.log('mounting')
-    // await this.props.displayRoutes()
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-    console.log(this.state)
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    // this.setState({
-
-    //     [event.target.name]:event.target.value
-
-    // })
-    // console.log(this.state)
+  componentDidMount() {
+    // for now hardcoding userId and routeId, todo pass by props
+    const userId = 111
+    const routeId = 1
+    this.props.displayTrafficSamples(userId, routeId)
   }
 
   render() {
     return (
-      <div>
-        <h1>Statistics:</h1>
+      <React.Fragment>
         <div>
-          <XYPlot width={300} height={300}>
-            <HorizontalGridLines />
-            <LineSeries data={[{x: 1, y: 10}, {x: 2, y: 5}, {x: 3, y: 15}]} />
-            <XAxis />
-            <YAxis />
-          </XYPlot>
+          <h1>Statistics:</h1>
+          <div>
+            {this.props.samples ? (
+              <XYPlot xType="time" width={300} height={300}>
+                <HorizontalGridLines />
+                <LineSeries data={this.props.samples} />
+                <XAxis tickLabelAngle={-90} />
+                <YAxis />
+              </XYPlot>
+            ) : null}
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = state => {
+  return {
+    samples: state.trafficsample.trafficsamples
+      .map(item => ({x: new Date(item.timepoint), y: item.travelTimeSeconds}))
+      .sort((a, b) => (a.x > b.x ? 1 : -1))
+    // samples : state.trafficsample.trafficsamples.map( item => ( { x : item.timepoint, y : item.travelTimeSeconds}))
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // displayRoutes: () => dispatch(displayRoutes())
+    displayTrafficSamples: (userId, routeId) =>
+      dispatch(displayTrafficSamples(userId, routeId))
   }
 }
 

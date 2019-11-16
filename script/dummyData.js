@@ -56,6 +56,48 @@ const trafficsamples = [
     timepoint: '2019-11-15T03:17:22.296011',
     travelTimeSeconds: 1,
     routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:18:22.296011',
+    travelTimeSeconds: 12,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:19:22.296011',
+    travelTimeSeconds: 1,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:20:22.296011',
+    travelTimeSeconds: 9,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:21:22.296011',
+    travelTimeSeconds: 3,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:22:22.296011',
+    travelTimeSeconds: 5,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:23:22.296011',
+    travelTimeSeconds: 1,
+    routeId: 1
+  },
+
+  {
+    timepoint: '2019-11-15T03:24:22.296011',
+    travelTimeSeconds: 6,
+    routeId: 1
   }
 ]
 
