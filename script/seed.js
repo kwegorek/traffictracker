@@ -14,10 +14,10 @@ async function seed() {
   const routesSeed = await Promise.all(routes.map(route => Route.create(route)))
   console.log(`seeded ${routesSeed.length} routes`)
 
-  const trafficsamplesSeed = await Promise.all(
-    trafficsamples.map(timepoint => TrafficSample.create(timepoint))
-  )
-  console.log(`seeded ${trafficsamplesSeed.length} trafficsamples`)
+  // const trafficsamplesSeed = await Promise.all(
+  //   trafficsamples.map(timepoint => TrafficSample.create(timepoint))
+  // )
+  // console.log(`seeded ${trafficsamplesSeed.length} trafficsamples`)
 
   // const users = await Promise.all([
   //   User.create({email: 'cody@email.com', password: '123'}),

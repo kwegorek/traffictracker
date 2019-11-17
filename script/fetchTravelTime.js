@@ -15,10 +15,27 @@ async function fetchTravelTime() {
 
   let routes = await Route.findAll()
   let samples = routes.map(async route => {
-    return TrafficSample.create({
-      travelTimeSeconds: 1000,
-      routeId: route.id
-    })
+    const plainRoute = route.get({plain: true})
+    const ret = distance.get(
+      {
+        origins: [plainRoute.start],
+        destinations: [plainRoute.end]
+      },
+      async function(err, data) {
+        if (err) return console.log(err)
+        console.log(data)
+        await TrafficSample.create({
+          routeId: route.id,
+          travelTimeSeconds: data[0].durationValue
+        })
+      }
+    )
+    console.log('-->', ret)
+    return ret
+    // return TrafficSample.create({
+    //   travelTimeSeconds: 1000,
+    //   routeId: route.id
+    // })
     //return route.setTrafficsamples([trafficsample])
   })
   return Promise.all(samples).then(oneNewSampleForEachRoute => {
@@ -56,9 +73,7 @@ async function fetchTravelTime() {
 //         travelTimeSeconds: data[0].durationValue
 //       })
 //       await route.setTrafficsamples([trafficsample])
-
 //         console.log("Saved!!", trafficsample.get({plain: true}))
-
 //     }
 //   )
 
@@ -76,7 +91,7 @@ async function runFetchTravelTime() {
     process.exitCode = 1
   } finally {
     console.log('closing db connection')
-    await db.close()
+    //await db.close()
     console.log('db connection closed')
   }
 }
