@@ -21,14 +21,8 @@ console.log(`const users = [
 const routes = [
   {
     id: 1,
-    start: [-74.007624, 40.705137],
-    end: [-74.007108, 40.707894],
-    userId: 1
-  },
-  {
-    id: 2,
-    start: [-73.999542, 40.715317],
-    end: [-74.007108, 40.707894],
+    start: '5 Hanover Square 11th Floor, New York, NY 10004',
+    end: 'Philadelphia',
     userId: 1
   }
 ]
@@ -45,7 +39,7 @@ for (let i = 0; i < 100; ++i) {
 
   console.log(`
   {
-    timepoint: "${timepoint}",
+    timepoint: '${timepoint}',
     travelTimeSeconds: ${timespent},
     routeId: 1
   },`)
