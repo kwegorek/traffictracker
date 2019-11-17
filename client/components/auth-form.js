@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Welcome} from '../components'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 let traffic_back =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mZVVLVbddJc1EDouq7D9o5F60FNPEch4CUugn9xJ88u1t4Tv&s'
@@ -35,9 +36,7 @@ const AuthForm = props => {
             </div>
             {error && error.response && <div> {error.response.data} </div>}
           </form>
-        </div>
-        <div className="login-col logincol2">
-          <a href="/auth/google">{displayName} with Google</a>
+          <Link to="/auth/google">{displayName} with Google</Link>
         </div>
       </div>
     </div>

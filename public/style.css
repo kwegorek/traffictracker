@@ -127,26 +127,85 @@ nav {
 }
 
 .login-container {
-  border: solid;
   display: flex;
+}
+
+#allroutes-wrapper {
+  margin: 15px;
+  background-color: white;
+}
+
+.allroutes-wrapper-row-1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.allroutes-wrapper-col1 {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  flex: 1;
+
+  font-size: 30px;
   background: #fde168;
 }
+
+.allroutes-wrapper-col2 {
+  display: flex;
+  margin: 50px;
+  padding: 10px;
+  flex-direction: column;
+
+  flex: 1;
+  font-size: 20px;
+  background: #fde168;
+}
+
+.add-route {
+  background: coral;
+}
+
+/* background: #fde168; */
 
 .login-col {
   flex: 1;
+  margin: 50px 50px;
+  padding: 10px;
+  background: white;
+  font-size: 20px;
+  box-shadow: 0 4px 8px 0 rgba(8, 8, 8, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .form-container {
-  background: #fde168;
+  font-size: 20px;
 }
 
-.logincol2 {
-  background: #b5def0;
+input[type='text'] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type='password'] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+/* .logincol2 {
+  background: white;
+} */
+
+a {
+  font-size: 17px;
 }
 
 .login-wrapper {
   margin-bottom: 60px;
   background: grey;
-  border: solid;
   height: 500px;
   margin-top: 90px;
   background-position: center;

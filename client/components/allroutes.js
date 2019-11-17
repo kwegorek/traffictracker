@@ -46,36 +46,42 @@ class AllRoutes extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div>
+        {/* <div>
           <h1>Map</h1>
           <MapBox />
-        </div>
+        </div> */}
 
         <div id="allroutes-wrapper">
-          <div className="col1">
-            <h2>Add route:</h2>
-            <form onSubmit={this.handleSubmit}>
-              <label htmlFor="place">Name of start point:</label>
-              <input
-                name="start"
-                onChange={this.handleChange}
-                value={this.state.start}
-              />
-              <label htmlFor="place">Name of end point:</label>
-              <input
-                name="end"
-                value={this.state.end}
-                onChange={this.handleChange}
-              />
-              <button type="submit">Add route</button>
-            </form>
-            <h1>All routes:</h1>
-            <div>
-              {this.props.routes
-                ? this.props.routes.map((route, indx) => {
-                    return <SingleRoute key={indx} route={route} />
-                  })
-                : null}{' '}
+          <div className="allroutes-wrapper-row-1">
+            <div className="allroutes-wrapper-col1">
+              <h2>Add route</h2>
+              <form onSubmit={this.handleSubmit}>
+                <label htmlFor="place">Name of start point:</label>
+                <input
+                  name="start"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.start}
+                />
+                <label htmlFor="place">Name of end point:</label>
+                <input
+                  name="end"
+                  type="text"
+                  value={this.state.end}
+                  onChange={this.handleChange}
+                />
+                <button type="submit">Add route</button>
+              </form>
+            </div>
+            <div className="allroutes-wrapper-col2">
+              <h1>Tracked routes</h1>
+              <div>
+                {this.props.routes
+                  ? this.props.routes.map((route, indx) => {
+                      return <SingleRoute key={indx} route={route} />
+                    })
+                  : null}{' '}
+              </div>
             </div>
           </div>
         </div>
