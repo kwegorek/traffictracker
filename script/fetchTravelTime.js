@@ -12,31 +12,66 @@ distance.apiKey = process.env.GOOGLE_DISTANCE_API_KEY
 
 async function fetchTravelTime() {
   await db.sync()
-  const fetchedRoutes = await Route.findAll()
-  fetchedRoutes.forEach(route => {
-    const plainRoute = route.get({plain: true})
-    console.log('-->', plainRoute)
-    distance.get(
-      {
-        origins: [plainRoute.start],
-        destinations: [plainRoute.end]
-      },
-      function(err, data) {
-        if (err) return console.log(err)
-        console.log(data)
-      }
-    )
+
+  let routes = await Route.findAll()
+  let samples = routes.map(async route => {
+    return TrafficSample.create({
+      travelTimeSeconds: 1000,
+      routeId: route.id
+    })
+    //return route.setTrafficsamples([trafficsample])
+  })
+  return Promise.all(samples).then(oneNewSampleForEachRoute => {
+    console.log(oneNewSampleForEachRoute)
   })
 }
+// console.log(fetchedRoutes)
+// console.log("11", await Promise.all([future]))
+
+// console.log("--",samples)
+// samples.forEach(sample => console.log(sample.get({plain:true})))
+// const plainRoute = route.get({plain: true})
+// return 1
+// console.log('-->', route)
+
+// console.log("--->1")
+// const trafficsample = TrafficSample.build(  {
+//   timepoint: new Date().toUTCString(),
+//   travelTimeSeconds: 1000
+// })
+// console.log("--->2", trafficsample.get({plain: true}))
+//  route.setTrafficsamples([trafficsample])
+// console.log("--->3")
+
+//   distance.get(
+//     {
+//       origins: [plainRoute.start],
+//       destinations: [plainRoute.end]
+//     },
+//     async function(err, data) {
+//       if (err) return console.log(err)
+//       console.log(data)
+//       const trafficsample = await TrafficSample.create(  {
+//         timepoint: new Date().toUTCString,
+//         travelTimeSeconds: data[0].durationValue
+//       })
+//       await route.setTrafficsamples([trafficsample])
+
+//         console.log("Saved!!", trafficsample.get({plain: true}))
+
+//     }
+//   )
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
 async function runFetchTravelTime() {
-  console.log('seeding...')
+  console.log('fetching travel times for all routes...')
   try {
     await fetchTravelTime()
+    console.log('end')
   } catch (err) {
+    console.log(err)
     console.error(err)
     process.exitCode = 1
   } finally {
