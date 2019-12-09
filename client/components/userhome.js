@@ -13,7 +13,7 @@ export class UserHome extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home-container">
         <h3>Welcome!</h3>
         <p>
           TrafficTracker allows user to track traffic patterns long ter.
