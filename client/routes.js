@@ -8,9 +8,7 @@ import {
   UserHome,
   AllRoutes,
   Statistics,
-  SingleRoute,
-  MapBox,
-  Welcome
+  SingleRoute
 } from './components'
 import {me} from './store'
 
@@ -33,12 +31,14 @@ class Routes extends Component {
         <Route exact path="/allroutes" component={AllRoutes} />
         <Route exact path="/allroutes/:id" component={SingleRoute} />
         <Route exact path="/statistics" component={Statistics} />
-        <Route exact path="/map" component={MapBox} />
-        <Route exact path="/welcome" component={Welcome} />
+        <Route exact path="/home" component={UserHome} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/allroutes" component={AllRoutes} />
+            <Route exact path="/allroutes/:id" component={SingleRoute} />
+            <Route exact path="/statistics" component={Statistics} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

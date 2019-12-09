@@ -5,7 +5,7 @@
  */
 export {default as Navbar} from './navbar'
 export {default as Footer} from './footer'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './userhome'
 export {default as AllRoutes} from './allroutes'
 export {default as Traffic} from './traffic'
 export {default as Instruction} from './instruction'

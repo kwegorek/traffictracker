@@ -19,7 +19,7 @@ class AllRoutes extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mounting')
+    console.log('mounting allroutes')
 
     this.props.displayRoutes()
 
