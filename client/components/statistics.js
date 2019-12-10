@@ -24,6 +24,7 @@ class Statistics extends React.Component {
     // for now hardcoding userId and routeId, todo pass by props
     const userId = 111
     const routeId = 1
+
     this.props.displayTrafficSamples(userId, routeId)
   }
 
@@ -32,18 +33,6 @@ class Statistics extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <div>
-          <h1>Statistics:</h1>
-          <div>
-            {this.props.samples ? (
-              <XYPlot xType="time" width={900} height={500}>
-                <HorizontalGridLines />
-                <LineSeries data={this.props.samples} />
-                <XAxis tickLabelAngle={-90} />
-                <YAxis />
-              </XYPlot>
-            ) : null}
-            </div> */}
         <div>
           <div>
             <XYPlot

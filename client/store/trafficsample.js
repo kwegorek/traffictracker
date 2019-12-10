@@ -29,7 +29,7 @@ const getTrafficSamples = trafficsamples => ({
 export const displayTrafficSamples = (userId, routeId) => async dispatch => {
   try {
     // for now ignore userId, use it later
-    const {data} = await axios.get('./api/trafficsamples/' + routeId)
+    const {data} = await axios.get('/api/trafficsamples/' + routeId)
     console.log('trafficsamples ----------', data)
 
     dispatch(getTrafficSamples(data))

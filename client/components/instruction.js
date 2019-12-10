@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {displayRoutes} from '../store/route'
+import {displayRoutes} from '../store/routes'
 
 class Instruction extends React.Component {
   constructor() {

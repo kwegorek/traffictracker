@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteRouteThunk, displayOneRoute} from '../store/route'
+import {deleteRouteThunk, displayOneRoute} from '../store/routes'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
-import {Traffic} from '../components'
+import {Statistics} from '../components/statistics'
 
 class SingleRoute extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class SingleRoute extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.route.id)
+    // console.log(this.props.route.id)
   }
 
   render() {
@@ -20,18 +20,15 @@ class SingleRoute extends React.Component {
       <div id="singleRoute">
         <div className="description-container">
           <h2>Name of route:</h2>
-          <div>Name of start point:{}</div>
-          <div>Name of endpoint:{}</div>
+          <div>Name of start point:</div>
+          <div>Name of endpoint:</div>
         </div>
         <div>
-          <button
-            type="submit"
-            onClick={() => this.props.deleteRouteThunk(this.props.route.id)}
-          >
+          <button type="submit" onClick={() => this.props.deleteRouteThunk()}>
             Remove
           </button>
         </div>
-        <Traffic />
+        <div>{/* <Statistics route={this.props.route}/> */}</div>
       </div>
     )
   }
@@ -45,7 +42,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    //displayOneRoute:(id) =>  dispatch(displayOneRoute(id)),
     deleteRouteThunk: id => dispatch(deleteRouteThunk(id))
   }
 }

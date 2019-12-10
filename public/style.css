@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
   font-size: 17px;
-  line-height: 1;
+  line-height: 1.5;
 }
 
 a {
@@ -214,10 +214,20 @@ a {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mZVVLVbddJc1EDouq7D9o5F60FNPEch4CUugn9xJ88u1t4Tv&s');
 }
 
-@media (max-width: 400px) {
-  .flex-grid {
-    display: block;
-  }
+.home-container {
+  display: block;
+  background: white;
+  justify-content: space-evenly;
+  font-size: larger;
 }
+/* .home-container {
+  background-color: white
+} */
+
+/* @media (max-width: 700px) {
+  .flex-grid {
+    display: column;
+  }
+} */
 
 /* #342f72 */

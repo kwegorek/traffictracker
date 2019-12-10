@@ -3,10 +3,10 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import route from './route'
+import routes from './routes'
 import trafficsample from './trafficsample'
 
-const reducer = combineReducers({user, route, trafficsample})
+const reducer = combineReducers({user, routes, trafficsample})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
