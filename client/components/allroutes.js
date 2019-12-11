@@ -30,8 +30,8 @@ class AllRoutes extends React.Component {
     evt.preventDefault()
 
     let location = {
-      start: evt.target.start.value,
-      end: evt.target.end.value
+      start: this.state.start,
+      end: this.state.end
     }
     this.props.addRouteThunk(location)
   }
@@ -50,7 +50,7 @@ class AllRoutes extends React.Component {
 
         <div className="allroutes-wrapper-col2">
           <h2> Add own route </h2>
-          <form onClick={evt => this.handlSubmit(evt)}>
+          <form onClick={evt => this.handleSubmit(evt)}>
             <input
               type="text"
               name="start"
