@@ -22,11 +22,16 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => {
+  return {}
+}
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES

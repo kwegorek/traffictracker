@@ -5,8 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const routes = await Route.findAll()
-
-    res.json(routes)
+    res.status(200).json(routes)
   } catch (err) {
     next(err)
   }
@@ -16,30 +15,29 @@ router.post('/', async (req, res, next) => {
   try {
     console.log(req.body, '------------------->')
     const post_route = await Route.create(req.body)
-    console.log('route posted')
-    res.json(post_route)
+
+    res.status(200).json(post_route)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/:routeid', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    console.log('------req.params.id--', req.params.routeid)
+    console.log('--[[[[[---req.params.id--', req.params.id)
 
-    const one_routes = await Route.findByPk(req.params.routeid)
+    const one_routes = await Route.findByPk(req.params.id)
 
-    console.log(one_routes, 'one_routes----------------')
-    res.json(one_routes)
+    res.status(200).json(one_routes)
   } catch (err) {
     next(err)
   }
 })
 
-router.delete('/:routeid', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   console.log(req.params.id, 'delete')
   try {
-    const routetodelete = await Route.findByPk(req.params.routeid)
+    const routetodelete = await Route.findByPk(req.params.id)
 
     await routetodelete.destroy()
     console.log(routetodelete, 'routetodelete')

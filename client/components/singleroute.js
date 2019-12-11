@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Statistics from '../components/statistics'
 import {deleteRouteThunk, displayOneRoute} from '../store/routes'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
-import {Statistics} from '../components/statistics'
+import {withRouter} from 'react-router-dom'
 
 class SingleRoute extends React.Component {
   constructor(props) {
@@ -12,23 +12,38 @@ class SingleRoute extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.route.id)
+    const {match: {params}} = this.props
+    const {id} = this.props.match.params
+    this.props.displayOneRoute(id)
   }
 
   render() {
+    const route = this.props.route
+
     return (
       <div id="singleRoute">
         <div className="description-container">
-          <h2>Name of route:</h2>
-          <div>Name of start point:</div>
-          <div>Name of endpoint:</div>
+          {route ? (
+            <div>
+              <h3>Name of route:</h3>
+              <div>Name of start point: {route.start}</div>
+              <div>Name of endpoint: {route.end}</div>
+            </div>
+          ) : null}
         </div>
+        {route ? (
+          <div>
+            <button
+              type="submit"
+              onClick={() => this.props.deleteRouteThunk(id)}
+            >
+              Remove
+            </button>
+          </div>
+        ) : null}
         <div>
-          <button type="submit" onClick={() => this.props.deleteRouteThunk()}>
-            Remove
-          </button>
+          <Statistics route={this.props.route} />
         </div>
-        <div>{/* <Statistics route={this.props.route}/> */}</div>
       </div>
     )
   }
@@ -36,14 +51,19 @@ class SingleRoute extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    //   route:state.route.route
+    user: state.user,
+    route: state.routes.route
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteRouteThunk: id => dispatch(deleteRouteThunk(id))
+    deleteRouteThunk: id => dispatch(deleteRouteThunk(id)),
+    addRouteAsLoggedIn: (userId, data) => dispatch(registerUser(userId, data)),
+    displayOneRoute: id => dispatch(displayOneRoute(id))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleRoute)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SingleRoute)
+)

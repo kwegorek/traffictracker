@@ -10,6 +10,7 @@ import {
   LineSeries,
   MarkSeries
 } from 'react-vis'
+import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
 
 class Statistics extends React.Component {
@@ -22,10 +23,10 @@ class Statistics extends React.Component {
 
   componentDidMount() {
     // for now hardcoding userId and routeId, todo pass by props
-    const userId = 111
-    const routeId = 1
-
-    this.props.displayTrafficSamples(userId, routeId)
+    const currUserId = this.props.user.id
+    const {match: {params}} = this.props
+    const routeId = params.id
+    this.props.displayTrafficSamples(currUserId, routeId)
   }
 
   render() {
@@ -114,6 +115,7 @@ class Statistics extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     samples: state.trafficsample.trafficsamples
       .map(item => ({x: new Date(item.timepoint), y: item.travelTimeSeconds}))
       .sort((a, b) => (a.x > b.x ? 1 : -1))
@@ -128,4 +130,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Statistics)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Statistics)
+)

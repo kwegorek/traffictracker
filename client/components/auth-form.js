@@ -14,9 +14,6 @@ const AuthForm = props => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        {/* <div>
-        <Welcome/>
-      </div> */}
         <div className="login-col">
           <form className="form-container" onSubmit={handleSubmit} name={name}>
             <div>

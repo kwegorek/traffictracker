@@ -1,8 +1,9 @@
 /* eslint-disable react/void-dom-elements-no-children */
 import React from 'react'
 import {connect} from 'react-redux'
-import {displayRoutes, addRouteThunk} from '../store/routes'
 import RouteView from '../components/routeview'
+import {displayRoutes, addRouteThunk} from '../store/routes'
+import {me} from '../store/user'
 
 class AllRoutes extends React.Component {
   constructor() {
@@ -28,21 +29,30 @@ class AllRoutes extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
     let location = {
       start: this.state.start,
-      end: this.state.end
+      end: this.state.end,
+      userId: this.props.user.id
     }
     this.props.addRouteThunk(location)
+
+    this.setState({
+      start: '',
+      end: ''
+    })
   }
 
   render() {
+    let propsUserId = this.props.user.id
+    let routes = this.props.routes
+    let filteredRoutes = routes.filter(route => route.userId === propsUserId)
+
     return (
       <div>
         <div className="allroutes-wrapper-col1">
-          <h1> Tracked routes </h1>
+          <h1>Tracked routes by {this.props.user.firstName}</h1>
           {this.props.routes
-            ? this.props.routes.map((route, indx) => {
+            ? filteredRoutes.map((route, indx) => {
                 return <RouteView key={indx} route={route} />
               })
             : null}
@@ -50,7 +60,7 @@ class AllRoutes extends React.Component {
 
         <div className="allroutes-wrapper-col2">
           <h2> Add own route </h2>
-          <form onClick={evt => this.handleSubmit(evt)}>
+          <form>
             <input
               type="text"
               name="start"
@@ -63,7 +73,10 @@ class AllRoutes extends React.Component {
               value={this.state.end}
               onChange={this.handleChange}
             />
-            <button type="submit"> Submit </button>
+            <button onClick={evt => this.handleSubmit(evt)} type="submit">
+              {' '}
+              Submit{' '}
+            </button>
           </form>
         </div>
       </div>
@@ -73,14 +86,16 @@ class AllRoutes extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    routes: state.routes.routes
+    routes: state.routes.routes,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     displayRoutes: () => dispatch(displayRoutes()),
-    addRouteThunk: added => dispatch(addRouteThunk(added))
+    addRouteThunk: added => dispatch(addRouteThunk(added)),
+    getUser: () => dispatch(me())
   }
 }
 
