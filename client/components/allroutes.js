@@ -50,7 +50,7 @@ class AllRoutes extends React.Component {
     return (
       <div>
         <div className="allroutes-wrapper-col1">
-          <h1>Tracked routes by {this.props.user.firstName}</h1>
+          <h3>Tracked routes by {this.props.user.firstName}</h3>
           {this.props.routes
             ? filteredRoutes.map((route, indx) => {
                 return <RouteView key={indx} route={route} />

@@ -35,7 +35,7 @@ class Statistics extends React.Component {
     return (
       <React.Fragment>
         <div>
-          <div>
+          <div className="plot-container">
             <XYPlot
               animation
               xDomain={
@@ -75,14 +75,13 @@ class Statistics extends React.Component {
                 }}
               />
             </XYPlot>
+            <button
+              className="showcase-button"
+              onClick={() => this.setState({lastDrawLocation: null})}
+            >
+              Reset Zoom
+            </button>
           </div>
-
-          <button
-            className="showcase-button"
-            onClick={() => this.setState({lastDrawLocation: null})}
-          >
-            Reset Zoom
-          </button>
 
           <div>
             <h4>

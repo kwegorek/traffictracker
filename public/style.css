@@ -86,17 +86,6 @@ label {
   font-weight: bold;
 }
 
-.mapContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 50vh;
-  width: 100vw;
-  border: solid;
-}
-
 .flex-grid {
   display: flex;
 }
@@ -145,22 +134,21 @@ nav {
   margin: 50px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
   flex: 1;
 
-  font-size: 30px;
-  background: #fde168;
+  font-size: 15px;
+  /* background: #fde168; */
 }
 
 .allroutes-wrapper-col2 {
   display: flex;
   margin: 50px;
-  padding: 10px;
+  padding: 5px;
   flex-direction: column;
-
   flex: 1;
-  font-size: 20px;
-  background: #fde168;
+  font-size: 15px;
+  /* background: #fde168; */
 }
 
 .add-route {
@@ -218,7 +206,30 @@ a {
   display: block;
   background: white;
   justify-content: space-evenly;
-  font-size: larger;
+  font-size: 15px;
+}
+
+.route-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin: 10px;
+}
+
+.route-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.route-card {
+  padding: 2px 16px;
+}
+
+.plot-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin: 10px;
+  background: silver;
 }
 /* .home-container {
   background-color: white

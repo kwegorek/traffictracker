@@ -59,7 +59,6 @@ export const addRouteThunk = route => async dispatch => {
 export const deleteRouteThunk = routeid => async dispatch => {
   try {
     const {data} = await axios.delete(`/api/routes/${routeid}`)
-
     console.log('Thunk, delete one', data)
 
     dispatch(deleteRoute(routeid))
