@@ -9,8 +9,11 @@ import {
   VerticalGridLines,
   Highlight,
   LineSeries,
-  MarkSeries
+  DecorativeAxis,
+  ChartLabel,
+  Line
 } from 'react-vis'
+import MyLabel from './mylabel'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
 
@@ -18,9 +21,10 @@ class Statistics extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      x_axis: this.props.samples.timepoint,
-      y_axis_start: this.props.samples.travelTimeSeconds
+      lastDrawLocation: null,
+      showAverageCommuteTime: null
     }
+    // this.myFormatter = this.myFormatter.bind(this)  }
   }
 
   componentDidMount() {
@@ -31,6 +35,13 @@ class Statistics extends React.Component {
     this.props.displayTrafficSamples(routeId)
   }
 
+  // myFormatter(t,i) {
+  //   return (<tspan>
+  //     <tspan x="0" dy="1em">MY VALUE</tspan>
+  //     <tspan x="0" dy="1em">{t}</tspan>
+  //   </tspan>);
+  // }
+
   render() {
     const {lastDrawLocation} = this.state
 
@@ -38,45 +49,77 @@ class Statistics extends React.Component {
       <React.Fragment>
         <div>
           <div>
-            <XYPlot
-              animation
-              xDomain={
-                lastDrawLocation && [
-                  lastDrawLocation.left,
-                  lastDrawLocation.right
-                ]
-              }
-              yDomain={
-                lastDrawLocation && [
-                  lastDrawLocation.bottom,
-                  lastDrawLocation.top
-                ]
-              }
-              width={1000}
-              height={500}
-            >
-              <HorizontalGridLines />
+            {this.state.showAverageCommuteTime ? (
+              <XYPlot width={300} height={300}>
+                <HorizontalGridLines />
+                <LineSeries
+                  data={[{x: 1, y: 10}, {x: 2, y: 5}, {x: 3, y: 15}]}
+                />
+                <XAxis />
+                <YAxis />
+              </XYPlot>
+            ) : (
+              <XYPlot
+                animation
+                xDomain={
+                  lastDrawLocation && [
+                    lastDrawLocation.left,
+                    lastDrawLocation.right
+                  ]
+                }
+                yDomain={
+                  lastDrawLocation && [
+                    lastDrawLocation.bottom,
+                    lastDrawLocation.top
+                  ]
+                }
+                width={1000}
+                height={500}
+              >
+                <HorizontalGridLines />
 
-              <YAxis title="time in sec" />
-              <XAxis title="timepoint" tickLabelAngle={-90} />
+                <YAxis title="time in sec" />
+                <XAxis title="timepoint" tickLabelAngle={-90} />
+                {/*               
+              <XAxis title="X Axis" style={{
+            line: {stroke: '#ADDDE1'},
+            ticks: {stroke: '#ADDDE1'},
+            text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+          // }}/> */}
+                {/* // <XAxis top={40} tickFormat={this.myFormatter} /> */}
 
-              <LineSeries key="sssss" data={this.props.samples} />
+                <XAxis
+                  top={0}
+                  tickLabelAngle={-90}
+                  style={{
+                    line: {stroke: '#ADDDE1'},
+                    ticks: {stroke: '#ADDDE1'},
+                    text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+                  }}
+                  tickFormat={v => `time am/pm ${v + 1}`}
+                  tickValues={[0, 5, 10, 15, 20]}
+                  title="X"
+                />
 
-              <Highlight
-                onBrushEnd={area => this.setState({lastDrawLocation: area})}
-                onDrag={area => {
-                  this.setState({
-                    lastDrawLocation: {
-                      bottom:
-                        lastDrawLocation.bottom + (area.top - area.bottom),
-                      left: lastDrawLocation.left - (area.right - area.left),
-                      right: lastDrawLocation.right - (area.right - area.left),
-                      top: lastDrawLocation.top + (area.top - area.bottom)
-                    }
-                  })
-                }}
-              />
-            </XYPlot>
+                <LineSeries key="sssss" data={this.props.samples} />
+
+                <Highlight
+                  onBrushEnd={area => this.setState({lastDrawLocation: area})}
+                  onDrag={area => {
+                    this.setState({
+                      lastDrawLocation: {
+                        bottom:
+                          lastDrawLocation.bottom + (area.top - area.bottom),
+                        left: lastDrawLocation.left - (area.right - area.left),
+                        right:
+                          lastDrawLocation.right - (area.right - area.left),
+                        top: lastDrawLocation.top + (area.top - area.bottom)
+                      }
+                    })
+                  }}
+                />
+              </XYPlot>
+            )}
           </div>
 
           <button
@@ -84,6 +127,19 @@ class Statistics extends React.Component {
             onClick={() => this.setState({lastDrawLocation: null})}
           >
             Reset Zoom
+          </button>
+
+          <button
+            className="showcase-button"
+            onClick={() => this.setState({showAverageCommuteTime: false})}
+          >
+            Show All Data
+          </button>
+          <button
+            className="showcase-button"
+            onClick={() => this.setState({showAverageCommuteTime: true})}
+          >
+            Show Average Commute Time
           </button>
 
           <div>
