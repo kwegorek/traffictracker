@@ -19,7 +19,6 @@ class SingleRoute extends React.Component {
   }
   handleDelete() {
     const {id} = this.props.match.params
-    console.log('----id', id)
     this.props.deleteRouteThunk(id)
   }
 
@@ -39,7 +38,7 @@ class SingleRoute extends React.Component {
               </button>
             </form>
 
-            <Statistics route={this.props.route} />
+            <Statistics route={route} />
           </div>
         ) : (
           <Redirect to="/allroutes" />

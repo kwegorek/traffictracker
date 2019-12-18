@@ -231,6 +231,10 @@ a {
   margin: 10px;
   background: silver;
 }
+
+.logout-container {
+  color: white;
+}
 /* .home-container {
   background-color: white
 } */

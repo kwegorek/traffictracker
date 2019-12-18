@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
 import {
@@ -17,7 +18,8 @@ class Statistics extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      lastDrawLocation: null
+      x_axis: this.props.samples.timepoint,
+      y_axis_start: this.props.samples.travelTimeSeconds
     }
   }
 
@@ -26,16 +28,16 @@ class Statistics extends React.Component {
     const currUserId = this.props.user.id
     const {match: {params}} = this.props
     const routeId = params.id
-    this.props.displayTrafficSamples(currUserId, routeId)
+    this.props.displayTrafficSamples(routeId)
   }
 
   render() {
     const {lastDrawLocation} = this.state
 
-    return (
+    return this.props.samples ? (
       <React.Fragment>
         <div>
-          <div className="plot-container">
+          <div>
             <XYPlot
               animation
               xDomain={
@@ -55,8 +57,8 @@ class Statistics extends React.Component {
             >
               <HorizontalGridLines />
 
-              <YAxis />
-              <XAxis tickLabelAngle={-90} />
+              <YAxis title="time in sec" />
+              <XAxis title="timepoint" tickLabelAngle={-90} />
 
               <LineSeries key="sssss" data={this.props.samples} />
 
@@ -75,13 +77,14 @@ class Statistics extends React.Component {
                 }}
               />
             </XYPlot>
-            <button
-              className="showcase-button"
-              onClick={() => this.setState({lastDrawLocation: null})}
-            >
-              Reset Zoom
-            </button>
           </div>
+
+          <button
+            className="showcase-button"
+            onClick={() => this.setState({lastDrawLocation: null})}
+          >
+            Reset Zoom
+          </button>
 
           <div>
             <h4>
@@ -108,24 +111,26 @@ class Statistics extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    )
+    ) : null
   }
 }
 
 const mapStateToProps = state => {
   return {
     user: state.user,
-    samples: state.trafficsample.trafficsamples
-      .map(item => ({x: new Date(item.timepoint), y: item.travelTimeSeconds}))
-      .sort((a, b) => (a.x > b.x ? 1 : -1))
-    // samples : state.trafficsample.trafficsamples.map( item => ( { x : item.timepoint, y : item.travelTimeSeconds}))
+    // samples: state.trafficsample.trafficsamples
+    //   .map(item => ({x: new Date(item.timepoint), y: item.travelTimeSeconds}))
+    //   .sort((a, b) => (a.x > b.x ? 1 : -1))
+    samples: state.trafficsample.trafficsamples.map((item, indx) => ({
+      x: indx,
+      y: item.travelTimeSeconds
+    }))
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    displayTrafficSamples: (userId, routeId) =>
-      dispatch(displayTrafficSamples(userId, routeId))
+    displayTrafficSamples: routeId => dispatch(displayTrafficSamples(routeId))
   }
 }
 

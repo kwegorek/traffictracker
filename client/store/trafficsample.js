@@ -26,12 +26,11 @@ const getTrafficSamples = trafficsamples => ({
 /**
  * THUNK CREATORS
  */
-export const displayTrafficSamples = (userId, routeId) => async dispatch => {
+export const displayTrafficSamples = routeId => async dispatch => {
   try {
     const {data} = await axios.get('/api/trafficsamples/' + routeId)
-    console.log('trafficsamples ----------', data)
-
     dispatch(getTrafficSamples(data))
+    return data
   } catch (err) {
     console.error(err)
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import Tutorial from '../components/tutorial'
 
 /**
  * COMPONENT
@@ -9,11 +10,10 @@ export const UserHome = props => {
   const {email} = props
 
   return (
-    <React.Fragment>
-      <div>
-        <h3>Welcome, {email}</h3>
-      </div>
-    </React.Fragment>
+    <div>
+      <h3>Welcome, {email}</h3>
+      <Tutorial />
+    </div>
   )
 }
 
