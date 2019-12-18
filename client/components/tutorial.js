@@ -27,23 +27,28 @@ class Tutorial extends React.Component {
     return (
       <div>
         <div>
-          <h1> Why traffic tracker ? </h1>
-          <p> Traffic Tracker shows real time data traffic. </p>
-        </div>
-        <div>
-          <h1> Functonalities </h1> <h2> Adding single route </h2>
-          <p> A logged in user can track up to 3 routes. </p>
-          <h2>
-            Get email with traffic windows summary and aadjust your decisions to
-            your commute time
-          </h2>
-          <p> User gets statistics data update on email </p>
-        </div>
-        <div>
-          <h4>Summary</h4>
+          <h1> How traffic tracker works? </h1>
           <p>
-            Appplication allows to see day by day traffic and observe the
-            changes in traffic for a long time
+            {' '}
+            Traffic Tracker shows real time data traffic. It uses Google API to
+            get the most recentt changes in traffic and time needed to get to
+            the end point.
+          </p>
+        </div>
+        <div>
+          <h2>Adding route</h2>
+          <p>
+            {' '}
+            A logged in user can add route that will be tracked each day.
+            Tracking of user's route start on the following day at 12 p.m. and
+            continues until the user removes the route or stops tracking.
+          </p>
+          <h2>Summary on Email</h2>
+          <p>
+            {' '}
+            User gets statistics data on email. Summary answers those questions:
+            how much time on average you spend commuting between points? what is
+            the best commute window?
           </p>
         </div>
       </div>

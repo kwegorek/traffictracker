@@ -7,7 +7,7 @@ import {
   Signup,
   UserHome,
   AllRoutes,
-  Statistics,
+  Tutorial,
   SingleRoute
 } from './components'
 import {me} from './store'
@@ -28,17 +28,13 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route exact path="/allroutes" component={AllRoutes} />
-        <Route exact path="/allroutes/:id" component={SingleRoute} />
-        <Route exact path="/statistics" component={Statistics} />
-        <Route exact path="/home" component={UserHome} />
+        <Route exact path="/tutorial" component={Tutorial} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route exact path="/allroutes" component={AllRoutes} />
             <Route exact path="/allroutes/:id" component={SingleRoute} />
-            <Route exact path="/statistics" component={Statistics} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
