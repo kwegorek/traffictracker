@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
 const {Route} = require('../db/models')
+const distance = require('google-distance')
+distance.apiKey = 'AIzaSyB6ZqwIAn94sreynAfVzlypSg05hQzkjX8'
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -39,6 +42,7 @@ router.get('/:id/allroutes', async (req, res, next) => {
 })
 
 //all routes for a user
+
 router.post('/:id/allroutes', async (req, res, next) => {
   try {
     const userRoute = {
@@ -48,7 +52,7 @@ router.post('/:id/allroutes', async (req, res, next) => {
     }
 
     await Route.create(userRoute)
-    console.log('route cerated')
+    console.log('route cerated', response_distance)
 
     res.status(200)
   } catch (err) {

@@ -13,6 +13,7 @@ import {
 } from 'react-vis'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
+import GoogleMap from '../components/map'
 
 class Tutorial extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class Tutorial extends React.Component {
             the best commute window?
           </p>
         </div>
+        <GoogleMap />
       </div>
     )
   }

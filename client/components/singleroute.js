@@ -12,11 +12,12 @@ class SingleRoute extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {match: {params}} = this.props
     const {id} = this.props.match.params
     this.props.displayOneRoute(id)
   }
+
   handleDelete() {
     const {id} = this.props.match.params
     this.props.deleteRouteThunk(id)

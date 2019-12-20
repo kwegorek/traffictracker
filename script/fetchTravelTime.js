@@ -30,7 +30,7 @@ async function fetchTravelTime() {
         })
       }
     )
-    console.log('-->', ret)
+    console.log('-->google api ', ret)
     return ret
     // return TrafficSample.create({
     //   travelTimeSeconds: 1000,
