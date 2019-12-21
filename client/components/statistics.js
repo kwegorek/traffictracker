@@ -25,7 +25,8 @@ class Statistics extends React.Component {
       showAverageCommuteTime: null,
       timepoint: this.props.samples.timepoint
     }
-    this.myFormatterX = this.myFormatter.bind(this)
+    this.myFormatter = this.myFormatter.bind(this)
+    this.myFormatterY = this.myFormatterY.bind(this)
   }
 
   componentDidMount() {
@@ -48,9 +49,9 @@ class Statistics extends React.Component {
     return this.props.samples[Math.round(v)].timepoint
   }
 
-  myFormatterY(v) {
+  myFormatterY(sec) {
     // console.log('v', v)
-    return this.props.samples[Math.round(v)].timepoint
+    return sec
   }
 
   render() {
@@ -89,7 +90,10 @@ class Statistics extends React.Component {
               >
                 <HorizontalGridLines />
 
-                <YAxis title="time in sec" />
+                <YAxis
+                  title="time in sec"
+                  tickFormat={sec => this.myFormatterY(sec)}
+                />
                 <XAxis
                   title="timepoint"
                   top={40}
