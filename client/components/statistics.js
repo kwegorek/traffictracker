@@ -22,9 +22,10 @@ class Statistics extends React.Component {
     super(props)
     this.state = {
       lastDrawLocation: null,
-      showAverageCommuteTime: null
+      showAverageCommuteTime: null,
+      timepoint: this.props.samples.timepoint
     }
-    // this.myFormatter = this.myFormatter.bind(this)  }
+    this.myFormatterX = this.myFormatter.bind(this)
   }
 
   componentDidMount() {
@@ -41,6 +42,16 @@ class Statistics extends React.Component {
   //     <tspan x="0" dy="1em">{t}</tspan>
   //   </tspan>);
   // }
+
+  myFormatter(v) {
+    // console.log('v', v)
+    return this.props.samples[Math.round(v)].timepoint
+  }
+
+  myFormatterY(v) {
+    // console.log('v', v)
+    return this.props.samples[Math.round(v)].timepoint
+  }
 
   render() {
     const {lastDrawLocation} = this.state
@@ -79,8 +90,13 @@ class Statistics extends React.Component {
                 <HorizontalGridLines />
 
                 <YAxis title="time in sec" />
-                <XAxis title="timepoint" tickLabelAngle={-90} />
-                {/*               
+                <XAxis
+                  title="timepoint"
+                  top={40}
+                  tickFormat={v => this.myFormatter(v)}
+                  tickLabelAngle={-90}
+                />
+                {/*              
               <XAxis title="X Axis" style={{
             line: {stroke: '#ADDDE1'},
             ticks: {stroke: '#ADDDE1'},
@@ -88,8 +104,8 @@ class Statistics extends React.Component {
           // }}/> */}
                 {/* // <XAxis top={40} tickFormat={this.myFormatter} /> */}
 
-                <XAxis
-                  top={0}
+                {/* <XAxis
+                  top={410}
                   tickLabelAngle={-90}
                   style={{
                     line: {stroke: '#ADDDE1'},
@@ -99,7 +115,7 @@ class Statistics extends React.Component {
                   tickFormat={v => `time am/pm ${v + 1}`}
                   tickValues={[0, 5, 10, 15, 20]}
                   title="X"
-                />
+                /> */}
 
                 <LineSeries key="sssss" data={this.props.samples} />
 
@@ -179,7 +195,8 @@ const mapStateToProps = state => {
     //   .sort((a, b) => (a.x > b.x ? 1 : -1))
     samples: state.trafficsample.trafficsamples.map((item, indx) => ({
       x: indx,
-      y: item.travelTimeSeconds
+      y: item.travelTimeSeconds,
+      timepoint: item.timepoint
     }))
   }
 }
