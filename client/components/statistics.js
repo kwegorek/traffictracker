@@ -7,15 +7,38 @@ import {
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
+  DiscreteColorLegend,
   Highlight,
   LineSeries,
   DecorativeAxis,
   ChartLabel,
+  VerticalBarSeries,
   Line
 } from 'react-vis'
 import MyLabel from './mylabel'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
+
+const ITEMS = [
+  {
+    title:
+      'Traffic pattern at given point of the day. Each sample gatherd every 15 minutes.',
+    color: '#6742ca7a',
+    stroke: '#fff',
+    strokeWidth: 3
+  }
+]
+
+const getDate = () => {
+  var today = new Date()
+  var dd = String(today.getDate()).padStart(2, '0')
+  var mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
+  var yyyy = today.getFullYear()
+
+  today = mm + '/' + dd + '/' + yyyy
+
+  return today
+}
 
 class Statistics extends React.Component {
   constructor(props) {
@@ -27,6 +50,7 @@ class Statistics extends React.Component {
     }
     this.myFormatter = this.myFormatter.bind(this)
     this.myFormatterY = this.myFormatterY.bind(this)
+    this.showWeek = this.showWeek.bind(this)
   }
 
   componentDidMount() {
@@ -46,12 +70,23 @@ class Statistics extends React.Component {
 
   myFormatter(v) {
     // console.log('v', v)
+    // var date = new Date(str);
+    //     var day = date.getDate(); //Date of the month: 2 in our example
+    // var month = date.getMonth(); //Month of the Year: 0-based index, so 1 in our example
+    // var year = date.getFullYear() //Year: 2013
+
     return this.props.samples[Math.round(v)].timepoint
   }
 
+  showWeek() {
+    const allSampleslen = this.props.data
+    // const dateNow =
+  }
+
   myFormatterY(sec) {
-    // console.log('v', v)
-    return sec
+    console.log('sec', sec)
+
+    return Math.round(Number(sec) / 60) + ' min'
   }
 
   render() {
@@ -62,105 +97,127 @@ class Statistics extends React.Component {
         <div>
           <div>
             {this.state.showAverageCommuteTime ? (
-              <XYPlot width={300} height={300}>
-                <HorizontalGridLines />
-                <LineSeries
-                  data={[{x: 1, y: 10}, {x: 2, y: 5}, {x: 3, y: 15}]}
-                />
-                <XAxis />
-                <YAxis />
-              </XYPlot>
+              <div id="plot-container" className="rec">
+                <h1 className="graph">Average Commute Time by Day</h1>
+                <XYPlot
+                  width={1000}
+                  height={500}
+                  margin={{left: 50, bottom: 160}}
+                >
+                  <VerticalBarSeries data={this.props.samples} />
+                  <YAxis
+                    title="time in min"
+                    tickFormat={sec => this.myFormatterY(sec)}
+                  />
+                  <XAxis
+                    title="timepoint"
+                    down={20}
+                    tickFormat={v => this.myFormatter(v)}
+                    tickLabelAngle={-90}
+                  />
+                </XYPlot>{' '}
+              </div>
             ) : (
-              <XYPlot
-                animation
-                xDomain={
-                  lastDrawLocation && [
-                    lastDrawLocation.left,
-                    lastDrawLocation.right
-                  ]
-                }
-                yDomain={
-                  lastDrawLocation && [
-                    lastDrawLocation.bottom,
-                    lastDrawLocation.top
-                  ]
-                }
-                width={1000}
-                height={500}
-              >
-                <HorizontalGridLines />
+              <div id="plot-container" className="rec">
+                <h1 className="graph">Commute Time by day and time</h1>
+                <XYPlot
+                  margin={{left: 50, bottom: 160}}
+                  labelsStyle={{fontSize: 16, fill: '#222'}}
+                  animation
+                  xDomain={
+                    lastDrawLocation && [
+                      lastDrawLocation.left,
+                      lastDrawLocation.right
+                    ]
+                  }
+                  yDomain={
+                    lastDrawLocation && [
+                      lastDrawLocation.bottom,
+                      lastDrawLocation.top
+                    ]
+                  }
+                  width={1000}
+                  height={500}
+                >
+                  <HorizontalGridLines />
 
-                <YAxis
-                  title="time in sec"
-                  tickFormat={sec => this.myFormatterY(sec)}
-                />
-                <XAxis
-                  title="timepoint"
-                  top={40}
-                  tickFormat={v => this.myFormatter(v)}
-                  tickLabelAngle={-90}
-                />
-                {/*              
-              <XAxis title="X Axis" style={{
-            line: {stroke: '#ADDDE1'},
-            ticks: {stroke: '#ADDDE1'},
-            text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
-          // }}/> */}
-                {/* // <XAxis top={40} tickFormat={this.myFormatter} /> */}
+                  <YAxis
+                    title="time in min"
+                    tickFormat={sec => this.myFormatterY(sec)}
+                  />
+                  <XAxis
+                    title="timepoint"
+                    down={20}
+                    tickFormat={v => this.myFormatter(v)}
+                    tickLabelAngle={-90}
+                  />
 
-                {/* <XAxis
-                  top={410}
-                  tickLabelAngle={-90}
-                  style={{
-                    line: {stroke: '#ADDDE1'},
-                    ticks: {stroke: '#ADDDE1'},
-                    text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
-                  }}
-                  tickFormat={v => `time am/pm ${v + 1}`}
-                  tickValues={[0, 5, 10, 15, 20]}
-                  title="X"
-                /> */}
+                  <LineSeries key="sssss" data={this.props.samples} />
 
-                <LineSeries key="sssss" data={this.props.samples} />
+                  <Highlight
+                    onBrushEnd={area => this.setState({lastDrawLocation: area})}
+                    onDrag={area => {
+                      this.setState({
+                        lastDrawLocation: {
+                          bottom:
+                            lastDrawLocation.bottom + (area.top - area.bottom),
+                          left:
+                            lastDrawLocation.left - (area.right - area.left),
+                          right:
+                            lastDrawLocation.right - (area.right - area.left),
+                          top: lastDrawLocation.top + (area.top - area.bottom)
+                        }
+                      })
+                    }}
+                  />
 
-                <Highlight
-                  onBrushEnd={area => this.setState({lastDrawLocation: area})}
-                  onDrag={area => {
-                    this.setState({
-                      lastDrawLocation: {
-                        bottom:
-                          lastDrawLocation.bottom + (area.top - area.bottom),
-                        left: lastDrawLocation.left - (area.right - area.left),
-                        right:
-                          lastDrawLocation.right - (area.right - area.left),
-                        top: lastDrawLocation.top + (area.top - area.bottom)
-                      }
-                    })
-                  }}
-                />
-              </XYPlot>
+                  <DiscreteColorLegend
+                    margin={{left: 100}}
+                    down={10}
+                    items={ITEMS}
+                    width={240}
+                  />
+                </XYPlot>
+              </div>
             )}
           </div>
 
           <button
-            className="showcase-button"
+            className="showcase-button showcase-button-container"
             onClick={() => this.setState({lastDrawLocation: null})}
           >
             Reset Zoom
           </button>
 
           <button
-            className="showcase-button"
+            className="showcase-button showcase-button-container"
             onClick={() => this.setState({showAverageCommuteTime: false})}
           >
             Show All Data
           </button>
           <button
-            className="showcase-button"
+            className="showcase-button showcase-button-container"
             onClick={() => this.setState({showAverageCommuteTime: true})}
           >
             Show Average Commute Time
           </button>
+
+          {this.state.showAverageCommuteTime ? null : (
+            <React.Fragment>
+              <button
+                className="showcase-button-show-week-day showcase-button-container"
+                onClick={() => this.setState({showAverageCommuteTime: false})}
+              >
+                Show 7 days
+              </button>
+              <button
+                className="showcase-button-show-week-day showcase-button-container"
+                onClick={() => this.setState({showAverageCommuteTime: false})}
+              >
+                Show 1 day
+              </button>{' '}
+            </React.Fragment>
+          )}
 
           <div>
             <h4>
@@ -201,7 +258,8 @@ const mapStateToProps = state => {
       x: indx,
       y: item.travelTimeSeconds,
       timepoint: item.timepoint
-    }))
+    })),
+    data: state.trafficsample.trafficsamples
   }
 }
 

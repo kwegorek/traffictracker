@@ -11,7 +11,7 @@ body {
 html,
 body {
   height: 100%;
-  margin: 0;
+  margin: 10;
   padding: 0;
 }
 
@@ -44,6 +44,30 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+.showcase-button-show-week-day {
+  background-color: green;
+}
+
+h1.graph {
+  text-align: center;
+}
+
+.showcase-button-container {
+  margin-left: 30px;
+}
+
+#plot-container {
+  height: 700px;
+  margin-left: 10px;
+  margin-top: 90px;
+}
+
+.rec {
+  padding: 5px;
+  background-color: white;
+  font-weight: 700;
+  /* text-align: center; */
 }
 
 .footer {
