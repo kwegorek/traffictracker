@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {deleteRouteThunk} from '../store/routes'
-import {Link} from 'react-router-dom'
-import {withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 const RouteView = ({route}) => {
   return (

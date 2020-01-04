@@ -29,7 +29,7 @@ const routes = [
 `)
 
 function addMinutes(minutes) {
-  const date = new Date('2019-11-15T03:14:22.296011')
+  const date = new Date()
   return new Date(date.setMinutes(date.getMinutes() + minutes))
 }
 console.log('const trafficsamples = [')

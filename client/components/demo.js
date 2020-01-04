@@ -8,18 +8,14 @@ import {
   XAxis,
   YAxis,
   HorizontalGridLines,
-  VerticalGridLines,
-  HorizontalBarSeries,
   DiscreteColorLegend,
   Highlight,
   LineSeries,
-  DecorativeAxis,
-  ChartLabel,
   Borders,
-  VerticalBarSeries,
-  Line
+  VerticalBarSeries
 } from 'react-vis'
-import {withRouter, Route, Switch} from 'react-router-dom'
+
+import {withRouter} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
 
 const ITEMS = [
@@ -43,7 +39,7 @@ const getDate = () => {
   return today
 }
 
-class Statistics extends React.Component {
+class Demo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -56,31 +52,14 @@ class Statistics extends React.Component {
     }
     this.myFormatter = this.myFormatter.bind(this)
     this.myFormatterY = this.myFormatterY.bind(this)
-    this.myFormatterMax = this.myFormatterMax.bind(this)
   }
 
   componentDidMount() {
     // for now hardcoding userId and routeId, todo pass by props
-    const currUserId = this.props.user.id
+    const currUserId = 1
     const {match: {params}} = this.props
-    const routeId = params.id
+    const routeId = 1
     this.props.displayTrafficSamples(routeId)
-  }
-
-  myFormatterMax = v => {
-    // console.log('v----------------->', Math.abs(Math.round(v)))
-    // console.log(this.props.maxTime, 'maxtime')
-    // console.log('v----------------->', this.props.maxTime[Math.abs(Math.floor(v))].timepoint)
-    // // return (
-    // //   new Date(this.props.samples[Math.round(v)].timepoint)
-    // //     .toISOString()
-    // //     .substring(5, 10) +
-    // //   ' hr.' +
-    // //   new Date(this.props.samples[Math.round(v)].timepoint)
-    // //     .toISOString()
-    // //     .substring(11, 16)
-    // // )
-    // return this.props.maxTime[Math.abs(Math.round(v))].timepoint
   }
 
   myFormatter(v) {
@@ -112,7 +91,7 @@ class Statistics extends React.Component {
           <div>
             {this.state.showAverageCommuteTime ? (
               <div id="plot-container" className="rec">
-                <h1 className="graph">Max Commute Time by Day</h1>
+                <h1 className="graph">Max Commute from Philadelphia to NYC</h1>
                 <XYPlot
                   xType="ordinal"
                   width={1000}
@@ -141,7 +120,7 @@ class Statistics extends React.Component {
               </div>
             ) : (
               <div id="plot-container" className="rec">
-                <h1 className="graph">Commute Time by day and time</h1>
+                <h1 className="graph">Commute Time from Philadelphia to NYC</h1>
                 <XYPlot
                   margin={{left: 50, bottom: 160}}
                   labelsStyle={{fontSize: 16, fill: '#222'}}
@@ -300,6 +279,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Statistics)
-)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Demo))

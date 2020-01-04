@@ -10,9 +10,10 @@ class GoogleMap extends React.Component {
       mapIsReady: true
     }
   }
+  //demo version templatte, API key not available
 
   componentDidMount() {
-    const ApiKey = 'AIzaSyDbAz1XXxDoKSU2nZXec89rcHPxgkvVoiw'
+    const ApiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     const script = document.createElement('script')
     // script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`;
     // script.async = true;
@@ -37,7 +38,11 @@ class GoogleMap extends React.Component {
   }
 
   render() {
-    return <div id="map">map</div>
+    return (
+      <div id="map">
+        <img src="img/demo_route.png" alt="Map" height="500" width="1000" />
+      </div>
+    )
   }
 }
 
