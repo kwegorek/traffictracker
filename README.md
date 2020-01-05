@@ -8,8 +8,6 @@ analysis helps you to decrease the time spent in the traffic and
 find the convenient commute window. It may help you decide whether
 to buy a house and commute or rely on city public transport.
 
-[Demo](demo.gif)
-
 
 ## Setup
 
@@ -75,3 +73,4 @@ If you want to run the server and/or `webpack` separately, you can also
 `npm run start-server` and `npm run build-client`.
 
 
+![](demo.gif)
