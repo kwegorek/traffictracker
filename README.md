@@ -73,4 +73,4 @@ If you want to run the server and/or `webpack` separately, you can also
 `npm run start-server` and `npm run build-client`.
 
 
-![](Jan-05-2020 01-59-20.gif=250x250)
+![](Jan-05-2020 01-59-20.gif)
