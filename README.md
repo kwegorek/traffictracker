@@ -73,4 +73,4 @@ If you want to run the server and/or `webpack` separately, you can also
 `npm run start-server` and `npm run build-client`.
 
 
-![](demo2.gif=250x250)
+![](demo2.gif)
