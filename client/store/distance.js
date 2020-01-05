@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import store from '.'
-const API_KEY = 'AIzaSyB6ZqwIAn94sreynAfVzlypSg05hQzkjX8'
+const API_KEY = 'XXXXXXXXXXX'
 
 // /**
 //  * ACTION TYPES
