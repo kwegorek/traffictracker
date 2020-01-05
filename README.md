@@ -1,7 +1,7 @@
 # Traffic Tracker
 
 Traffic Tracker efficiently allows you to factor commute time into your 
-decision-making process by keeping track of the commute for long-time period. 
+decision-making process by keeping track of the commute time for long-time period. 
 
 Traffic Tracker gathers real-time traffic data for the added route.
 It uses Google API to get the most recent changes in the traffic and
