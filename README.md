@@ -1,12 +1,14 @@
 # Traffic Tracker
 
+Traffic Tracker efficiently allows you to factor commute time into your 
+decision-making process by keeping track of the commute for long-time period. 
+
 Traffic Tracker gathers real-time traffic data for the added route.
 It uses Google API to get the most recent changes in the traffic and
 commute time. By tracking traffic over long period of time (e.g. 3
 months), you can see traffic patterns on the added route. Data
 analysis helps you to decrease the time spent in the traffic and
-find the convenient commute window. It may help you decide whether
-to buy a house and commute or rely on city public transport.
+find the convenient commute window. 
 
 
 ## Setup
@@ -18,7 +20,7 @@ To use this application, you'll need to take the following steps:
 * Run the following commands:
 
 ```
-git remote add traffictracker https://github.com/FullstackAcademy/boilermaker.git
+git remote add traffictracker https://github.com/kwegorek/traffictracker.git
 git fetch traffictracker
 git merge traffictracker/master
 ```
