@@ -8,6 +8,8 @@ analysis helps you to decrease the time spent in the traffic and
 find the convenient commute window. It may help you decide whether
 to buy a house and commute or rely on city public transport.
 
+[Demo](demo.gif)
+
 
 ## Setup
 
