@@ -1,58 +1,49 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {displayRoutes} from '../store/route'
-import {compose, withProps} from 'recompose'
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps'
 
-export class Map extends React.Component {
+import {withRouter, Route, Switch} from 'react-router-dom'
+
+class GoogleMap extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
-      stores: [
-        {lat: 47.49855629475769, lng: -122.14184416996333},
-        {latitude: 47.359423, longitude: -122.021071},
-        {latitude: 47.2052192687988, longitude: -121.988426208496},
-        {latitude: 47.6307081, longitude: -122.1434325},
-        {latitude: 47.3084488, longitude: -122.2140121},
-        {latitude: 47.5524695, longitude: -122.0425407}
-      ]
+      mapIsReady: true
     }
   }
+  //demo version templatte, API key not available
 
-  displayMarkers = () => {
-    return this.state.stores.map((store, index) => {
-      return (
-        <Marker
-          key={index}
-          id={index}
-          position={{
-            lat: store.latitude,
-            lng: store.longitude
-          }}
-          onClick={() => console.log('You clicked me!')}
-        />
-      )
-    })
+  componentDidMount() {
+    const ApiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    const script = document.createElement('script')
+    // script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`;
+    // script.async = true;
+    // script.defer = true;
+    // script.addEventListener('load', () => {
+    //   this.setState({ mapIsReady: true });
+    // });
+
+    document.body.appendChild(script)
+  }
+
+  componentDidUpdate() {
+    if (this.state.mapIsReady) {
+      // Display the map
+      //   this.map = new window.google.maps.Map(document.getElementById('map'), {
+      //     center: {lat: -34.397, lng: 150.644},
+      //     zoom: 12,
+      //     mapTypeId: 'roadmap',
+      //   });
+      // You also can add markers on the map below
+    }
   }
 
   render() {
     return (
-      <GoogleMap defaultZoom={8} defaultCenter={{lat: 47.444, lng: -122.176}}>
-        {this.displayMarkers()}
-      </GoogleMap>
+      <div id="map">
+        <img src="img/demo_route.png" alt="Map" height="500" width="1000" />
+      </div>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    displayRoutes: () => dispatch(displayRoutes())
-  }
-}
-
-export default withScriptjs(withGoogleMap(Map))
+export default withRouter(connect(null, null)(GoogleMap))

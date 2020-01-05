@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Welcome} from '../components'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 let traffic_back =
@@ -14,9 +13,6 @@ const AuthForm = props => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        {/* <div>
-        <Welcome/>
-      </div> */}
         <div className="login-col">
           <form className="form-container" onSubmit={handleSubmit} name={name}>
             <div>
@@ -43,13 +39,6 @@ const AuthForm = props => {
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',

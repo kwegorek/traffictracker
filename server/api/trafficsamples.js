@@ -1,14 +1,15 @@
 const router = require('express').Router()
 const {Route} = require('../db/models')
+const {TrafficSample} = require('../db/models')
 module.exports = router
 
 router.get('/:routeid', async (req, res, next) => {
   try {
-    console.log('------req.params.id--', req.params.routeid)
-
-    const myroute = await Route.findByPk(req.params.routeid)
-    const trafficSamples = await myroute.getTrafficsamples()
-    res.json(trafficSamples)
+    const trafficSamples = await TrafficSample.findAll({
+      where: {routeId: req.params.routeid}
+    })
+    console.log('api db', trafficSamples)
+    res.send(trafficSamples)
   } catch (err) {
     next(err)
   }

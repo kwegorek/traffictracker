@@ -5,13 +5,12 @@
  */
 export {default as Navbar} from './navbar'
 export {default as Footer} from './footer'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './userhome'
 export {default as AllRoutes} from './allroutes'
-export {default as Traffic} from './traffic'
-export {default as Instruction} from './instruction'
-export {default as Map} from './map'
 export {default as Statistics} from './statistics'
 export {default as SingleRoute} from './singleroute'
-export {default as MapBox} from './mapbox'
-export {default as Welcome} from './welcome'
+export {default as RouteView} from './routeview'
+export {default as Tutorial} from './tutorial'
+
+export {default as GoogleMap} from './map'
 export {Login, Signup} from './auth-form'

@@ -1,6 +1,4 @@
 import axios from 'axios'
-import history from '../history'
-import store from '.'
 
 /**
  * ACTION TYPES
@@ -14,17 +12,16 @@ const REMOVE_ROUTE = 'REMOVE_ROUTE'
 /**
  * INITIAL STATE
  */
-const initialState = {}
+const initialState = {routes: []}
 
 /**
  * ACTION CREATORS
  */
-// const getRoutes = routes => ({type: GET_ROUTES, routes})
 const getRoutes = routes => ({type: GET_ROUTES, routes})
 
-const getOneRoute = route => ({type: GET_ONE_ROUTE, route})
+const addRoute = added => ({type: ADD_ROUTE, added})
 
-export const addRoute = added => ({type: ADD_ROUTE, added})
+const getOneRoute = route => ({type: GET_ONE_ROUTE, route})
 
 const deleteRoute = routeid => ({type: REMOVE_ROUTE, routeid})
 
@@ -33,9 +30,7 @@ const deleteRoute = routeid => ({type: REMOVE_ROUTE, routeid})
  */
 export const displayRoutes = () => async dispatch => {
   try {
-    const {data} = await axios.get('./api/routes')
-    console.log('routes ----------', data)
-
+    const {data} = await axios.get('/api/routes')
     dispatch(getRoutes(data))
   } catch (err) {
     console.error(err)
@@ -44,11 +39,7 @@ export const displayRoutes = () => async dispatch => {
 
 export const displayOneRoute = id => async dispatch => {
   try {
-    console.log('------------displayoneroute--->', id)
-
-    const {data} = await axios.get(`./api/routes/:${id}`)
-    console.log('show one', data)
-
+    const {data} = await axios.get('/api/routes/' + id)
     dispatch(getOneRoute(data))
   } catch (err) {
     console.error(err)
@@ -57,9 +48,8 @@ export const displayOneRoute = id => async dispatch => {
 
 export const addRouteThunk = route => async dispatch => {
   try {
-    console.log('add thunk', route)
-
-    const {data} = await axios.post('./api/routes', route)('route posted')
+    const {data} = await axios.post('/api/routes', route)
+    console.log('Thunk, route added')
     dispatch(addRoute(data))
   } catch (error) {
     console.error(error)
@@ -68,10 +58,8 @@ export const addRouteThunk = route => async dispatch => {
 
 export const deleteRouteThunk = routeid => async dispatch => {
   try {
-    console.log(routeid, '------------')
-    const {data} = await axios.delete(`./api/routes/${routeid}`)
-
-    console.log('delete one', data)
+    const {data} = await axios.delete(`/api/routes/${routeid}`)
+    console.log('Thunk, delete one', data)
 
     dispatch(deleteRoute(routeid))
   } catch (err) {

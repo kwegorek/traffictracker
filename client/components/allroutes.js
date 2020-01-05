@@ -1,105 +1,101 @@
+/* eslint-disable react/void-dom-elements-no-children */
 import React from 'react'
 import {connect} from 'react-redux'
-import {displayRoutes, getRoutes, addRouteThunk} from '../store/route'
-import Traffic from '../components/traffic'
-import SingleRoute from './singleroute'
-import MapBox from './mapbox'
-import store from '../routes'
+import RouteView from '../components/routeview'
+import {displayRoutes, addRouteThunk} from '../store/routes'
+import {me} from '../store/user'
 
 class AllRoutes extends React.Component {
   constructor() {
     super()
-
     this.state = {
       start: '',
       end: ''
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    console.log('mounting')
-
     this.props.displayRoutes()
-
-    console.log(this.props, 'props')
   }
 
-  handleChange(event) {
+  handleChange() {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-
     let location = {
-      start: evt.target.start.value,
-      end: evt.target.end.value
+      start: this.state.start,
+      end: this.state.end,
+      userId: this.props.user.id
     }
-    addRouteThunk(location)
+    this.props.addRouteThunk(location)
+
+    this.setState({
+      start: '',
+      end: ''
+    })
   }
 
   render() {
-    return (
-      <React.Fragment>
-        {/* <div>
-          <h1>Map</h1>
-          <MapBox />
-        </div> */}
+    let propsUserId = this.props.user.id
+    let routes = this.props.routes
+    let filteredRoutes = routes.filter(route => route.userId === propsUserId)
 
-        <div id="allroutes-wrapper">
-          <div className="allroutes-wrapper-row-1">
-            <div className="allroutes-wrapper-col1">
-              <h2>Add route</h2>
-              <form onSubmit={this.handleSubmit}>
-                <label htmlFor="place">Name of start point:</label>
-                <input
-                  name="start"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.start}
-                />
-                <label htmlFor="place">Name of end point:</label>
-                <input
-                  name="end"
-                  type="text"
-                  value={this.state.end}
-                  onChange={this.handleChange}
-                />
-                <button type="submit">Add route</button>
-              </form>
-            </div>
-            <div className="allroutes-wrapper-col2">
-              <h1>Tracked routes</h1>
-              <div>
-                {this.props.routes
-                  ? this.props.routes.map((route, indx) => {
-                      return <SingleRoute key={indx} route={route} />
-                    })
-                  : null}{' '}
-              </div>
-            </div>
-          </div>
+    return (
+      <div>
+        <div className="allroutes-wrapper-col1">
+          <h3>Tracked routes by {this.props.user.firstName}</h3>
+          {this.props.routes
+            ? filteredRoutes.map((route, indx) => {
+                return <RouteView key={indx} route={route} />
+              })
+            : null}
         </div>
-      </React.Fragment>
+
+        <div className="allroutes-wrapper-col2">
+          <h2> Add own route </h2>
+          <form>
+            <input
+              type="text"
+              name="start"
+              value={this.state.start}
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              name="end"
+              value={this.state.end}
+              onChange={this.handleChange}
+            />
+            <button onClick={evt => this.handleSubmit(evt)} type="submit">
+              {' '}
+              Submit{' '}
+            </button>
+          </form>
+        </div>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    routes: state.route.routes
+    routes: state.routes.routes,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     displayRoutes: () => dispatch(displayRoutes()),
-    addRouteThunk: added => dispatch(addRouteThunk(added))
+    addRouteThunk: added => dispatch(addRouteThunk(added)),
+    getUser: () => dispatch(me())
   }
 }
 

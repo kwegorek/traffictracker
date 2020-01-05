@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import Tutorial from '../components/tutorial'
 
 /**
  * COMPONENT
@@ -10,7 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <Tutorial />
     </div>
   )
 }
@@ -20,11 +21,16 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => {
+  return {}
+}
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES

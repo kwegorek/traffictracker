@@ -1,37 +1,49 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteRouteThunk, displayOneRoute} from '../store/route'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
-import {Traffic} from '../components'
+import Statistics from '../components/statistics'
+import {deleteRouteThunk, displayOneRoute} from '../store/routes'
+import {withRouter, Redirect} from 'react-router-dom'
 
 class SingleRoute extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {}
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
-  componentDidMount() {
-    console.log(this.props.route.id)
+  async componentDidMount() {
+    const {match: {params}} = this.props
+    const {id} = this.props.match.params
+    this.props.displayOneRoute(id)
+  }
+
+  handleDelete() {
+    const {id} = this.props.match.params
+    this.props.deleteRouteThunk(id)
   }
 
   render() {
+    const route = this.props.route
+
     return (
       <div id="singleRoute">
-        <div className="description-container">
-          <h2>Name of route:</h2>
-          <div>Name of start point:{}</div>
-          <div>Name of endpoint:{}</div>
-        </div>
-        <div>
-          <button
-            type="submit"
-            onClick={() => this.props.deleteRouteThunk(this.props.route.id)}
-          >
-            Remove
-          </button>
-        </div>
-        <Traffic />
+        {route ? (
+          <div className="description-container">
+            <form className="route-card">
+              <h3>Name of route:</h3>
+              <div>Name of start point: {route.start}</div>
+              <div>Name of endpoint: {route.end}</div>
+              <button type="submit" onClick={this.handleDelete}>
+                Remove
+              </button>
+            </form>
+
+            <Statistics route={route} />
+          </div>
+        ) : (
+          <Redirect to="/allroutes" />
+        )}
       </div>
     )
   }
@@ -39,15 +51,19 @@ class SingleRoute extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    //   route:state.route.route
+    user: state.user,
+    route: state.routes.route
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    //displayOneRoute:(id) =>  dispatch(displayOneRoute(id)),
-    deleteRouteThunk: id => dispatch(deleteRouteThunk(id))
+    deleteRouteThunk: id => dispatch(deleteRouteThunk(id)),
+    addRouteAsLoggedIn: (userId, data) => dispatch(registerUser(userId, data)),
+    displayOneRoute: id => dispatch(displayOneRoute(id))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleRoute)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SingleRoute)
+)

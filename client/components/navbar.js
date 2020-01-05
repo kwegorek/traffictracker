@@ -4,48 +4,56 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Traffic Tracker</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link className="nav" to="/home">
-            Home
-          </Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link className="nav" to="/login">
-            Login
-          </Link>
-          <Link className="nav" to="/signup">
-            Sign Up
-          </Link>
-          <Link className="nav" to="/allroutes">
-            Check distance on the map
-          </Link>
-          <Link className="nav" to="/statistics">
-            Statistics
-          </Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
+const Navbar = ({handleClick, isLoggedIn, email}) => {
+  return (
+    <div>
+      <nav>
+        {isLoggedIn ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link className="nav" to="/home">
+              Get started
+            </Link>
+            <Link className="nav" to="/allroutes">
+              All user routes
+            </Link>
+            <a className=" nav" href="#" onClick={handleClick}>
+              Logout
+            </a>
+
+            <a className="name-nav nav" href="#">
+              {`Welcome, ${email}`}
+            </a>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+
+            <Link className="nav" to="/tutorial">
+              Get started
+            </Link>
+            <Link className="nav" to="/login">
+              Login
+            </Link>
+            <Link className="nav" to="/signup">
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </nav>
+      <hr />
+    </div>
+  )
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    email: state.user.email,
+    user: state.user
   }
 }
 
