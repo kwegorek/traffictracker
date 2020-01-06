@@ -42,7 +42,6 @@ router.get('/:id/allroutes', async (req, res, next) => {
 })
 
 //all routes for a user
-
 router.post('/:id/allroutes', async (req, res, next) => {
   try {
     const userRoute = {
@@ -52,7 +51,7 @@ router.post('/:id/allroutes', async (req, res, next) => {
     }
 
     await Route.create(userRoute)
-    console.log('route cerated', response_distance)
+    
 
     res.status(200)
   } catch (err) {
@@ -73,7 +72,7 @@ router.delete('/:id/allroutes', async (req, res, next) => {
         routeId: routeTodelte.id
       }
     })
-    console.log('----------deleted')
+   
     res.status(200)
   } catch (err) {
     next(err)
