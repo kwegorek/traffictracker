@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 const {Route} = require('../db/models')
 const distance = require('google-distance')
-distance.apiKey = 'AIzaSyB6ZqwIAn94sreynAfVzlypSg05hQzkjX8'
+distance.apiKey = process.env.GOOGLE_DISTANCE_API_KEY
 
 module.exports = router
 
