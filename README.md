@@ -10,7 +10,6 @@ months), you can see traffic patterns on the added route. Data
 analysis helps you to decrease the time spent in the traffic and
 find the convenient commute window. 
 
-
 ## Setup
 
 To use this application, you'll need to take the following steps:
