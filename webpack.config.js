@@ -10,10 +10,14 @@ module.exports = {
     path: __dirname,
     filename: './public/bundle.js'
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/
   },
