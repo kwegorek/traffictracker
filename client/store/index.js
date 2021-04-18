@@ -6,7 +6,7 @@ import user from './user'
 import routes from './routes'
 import trafficsample from './trafficsample'
 
-const reducer = combineReducers({user, routes, trafficsample, distance})
+const reducer = combineReducers({user, routes, trafficsample})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
