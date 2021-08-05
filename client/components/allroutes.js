@@ -45,13 +45,18 @@ class AllRoutes extends React.Component {
   render() {
     let propsUserId = this.props.user.id
     let routes = this.props.routes
+    console.log(routes, 'routes')
     let filteredRoutes = routes.filter(route => route.userId === propsUserId)
 
     return (
-      <div>
+      <div className="single-add-container">
         <div className="allroutes-wrapper-col1">
-          <h3>Tracked routes by {this.props.user.firstName}</h3>
-          {this.props.routes
+          {filteredRoutes.length > 0 && this.props.user.firstName.length > 0 ? (
+            <h3 style={{marginTop: '40px', textAlign: 'center'}}>
+              Tracked locations:
+            </h3>
+          ) : null}
+          {this.props.routes.length > 0
             ? filteredRoutes.map((route, indx) => {
                 return <RouteView key={indx} route={route} />
               })
@@ -59,11 +64,12 @@ class AllRoutes extends React.Component {
         </div>
 
         <div className="allroutes-wrapper-col2">
-          <h2> Add own route </h2>
+          <h2>Submit your route for tracking:</h2>
           <form>
             <input
               type="text"
               name="start"
+              placeholder="trip starts here eg. 5 Hanover Square, New York, NY 10004"
               value={this.state.start}
               onChange={this.handleChange}
             />
@@ -71,6 +77,7 @@ class AllRoutes extends React.Component {
               type="text"
               name="end"
               value={this.state.end}
+              placeholder="trip ends here eg. 333 S Broad St, Philadelphia, PA 19107"
               onChange={this.handleChange}
             />
             <button onClick={evt => this.handleSubmit(evt)} type="submit">

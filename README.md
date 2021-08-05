@@ -1,14 +1,14 @@
 # Traffic Tracker
 
-Traffic Tracker efficiently allows you to factor commute time into your 
-decision-making process by keeping track of the commute time for long-time period. 
+Traffic Tracker efficiently allows you to factor commute time into your
+decision-making process by keeping track of the commute time for long-time period.
 
 Traffic Tracker gathers real-time traffic data for the added route.
 It uses Google API to get the most recent changes in the traffic and
 commute time. By tracking traffic over long period of time (e.g. 3
 months), you can see traffic patterns on the added route. Data
 analysis helps you to decrease the time spent in the traffic and
-find the convenient commute window. 
+find the convenient commute window.
 
 ## Setup
 
@@ -58,6 +58,8 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 process.env.GOOGLE_DISTANCE_API_KEY = 'YOUR_API_KEY'
 ```
 
+### Google distance API
+
 ### OAuth
 
 * To use OAuth with Google, complete the steps above with a real client
@@ -73,5 +75,12 @@ Running `npm run start-dev` will make great things happen!
 If you want to run the server and/or `webpack` separately, you can also
 `npm run start-server` and `npm run build-client`.
 
+## npm notes
+
+For sequelize keep:
+
+    "pg": "^8.2.1",
+    "sequelize": "^5.21.13",
+    "sequelize-cli": "^5.5.1"
 
 ![](demo2.gif)

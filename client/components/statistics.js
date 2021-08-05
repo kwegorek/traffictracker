@@ -84,6 +84,7 @@ class Statistics extends React.Component {
   }
 
   myFormatter(v) {
+    console.log(v, 'v')
     return (
       new Date(this.props.samples[Math.round(v)].timepoint)
         .toISOString()
@@ -111,9 +112,12 @@ class Statistics extends React.Component {
         <div>
           <div>
             {this.state.showAverageCommuteTime ? (
-              <div id="plot-container" className="rec">
-                <h1 className="graph">Max Commute Time by Day</h1>
+              <div id="plot-container" className="rec travel-graph-container">
+                <h1 className="graph">
+                  Maximal time in traffic displayed on each day
+                </h1>
                 <XYPlot
+                  className="graph-container"
                   xType="ordinal"
                   width={1000}
                   height={500}
@@ -140,9 +144,10 @@ class Statistics extends React.Component {
                 </XYPlot>{' '}
               </div>
             ) : (
-              <div id="plot-container" className="rec">
-                <h1 className="graph">Commute Time by day and time</h1>
+              <div id="plot-container" className="rec travel-graph-container">
+                <h1 className="graph">Travel time to your destination</h1>
                 <XYPlot
+                  className="graph-container"
                   margin={{left: 50, bottom: 160}}
                   labelsStyle={{fontSize: 16, fill: '#222'}}
                   animation
@@ -239,18 +244,19 @@ class Statistics extends React.Component {
               })
             }
           >
-            Show All Data
+            Display all time records
           </button>
           <button
             className="showcase-button showcase-button-container"
             onClick={() => this.setState({showAverageCommuteTime: true})}
           >
-            Show Max Time in Traffic
+            Display max time in traffic
           </button>
           <div>
-            <h4>
+            <div className="marginTop" />
+            {/* <h4 >
               <b>Last Draw Area</b>
-            </h4>
+            </h4> */}
             {lastDrawLocation ? (
               <ul style={{listStyle: 'none'}}>
                 <li>
@@ -266,9 +272,7 @@ class Statistics extends React.Component {
                   <b>Left:</b> {lastDrawLocation.left}
                 </li>
               </ul>
-            ) : (
-              <span>N/A</span>
-            )}
+            ) : null}
           </div>
         </div>
       </React.Fragment>

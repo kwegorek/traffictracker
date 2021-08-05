@@ -36,139 +36,139 @@ const trafficsamples = [
 
   {
     timepoint: '2019-11-15T08:29:22.296Z',
-    travelTimeSeconds: 841,
+    travelTimeSeconds: 7200,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T08:44:22.296Z',
-    travelTimeSeconds: 909,
+    travelTimeSeconds: 9090,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T08:59:22.296Z',
-    travelTimeSeconds: 141,
+    travelTimeSeconds: 7700,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T09:14:22.296Z',
-    travelTimeSeconds: 757,
+    travelTimeSeconds: 7570,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T09:29:22.296Z',
-    travelTimeSeconds: 959,
+    travelTimeSeconds: 9590,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T09:44:22.296Z',
-    travelTimeSeconds: 279,
+    travelTimeSeconds: 7790,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T09:59:22.296Z',
-    travelTimeSeconds: 657,
+    travelTimeSeconds: 6570,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T10:14:22.296Z',
-    travelTimeSeconds: 989,
+    travelTimeSeconds: 9890,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T10:29:22.296Z',
-    travelTimeSeconds: 412,
+    travelTimeSeconds: 7120,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T10:44:22.296Z',
-    travelTimeSeconds: 544,
+    travelTimeSeconds: 7440,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T10:59:22.296Z',
-    travelTimeSeconds: 1000,
+    travelTimeSeconds: 7000,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T11:14:22.296Z',
-    travelTimeSeconds: 537,
+    travelTimeSeconds: 7370,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T11:29:22.296Z',
-    travelTimeSeconds: 420,
+    travelTimeSeconds: 7200,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T11:44:22.296Z',
-    travelTimeSeconds: 991,
+    travelTimeSeconds: 9910,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T11:59:22.296Z',
-    travelTimeSeconds: 650,
+    travelTimeSeconds: 7500,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T12:14:22.296Z',
-    travelTimeSeconds: 288,
+    travelTimeSeconds: 7880,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T12:29:22.296Z',
-    travelTimeSeconds: 961,
+    travelTimeSeconds: 9610,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T12:44:22.296Z',
-    travelTimeSeconds: 751,
+    travelTimeSeconds: 7510,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T12:59:22.296Z',
-    travelTimeSeconds: 150,
+    travelTimeSeconds: 7000,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T13:14:22.296Z',
-    travelTimeSeconds: 913,
+    travelTimeSeconds: 9130,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T13:29:22.296Z',
-    travelTimeSeconds: 837,
+    travelTimeSeconds: 8370,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T13:44:22.296Z',
-    travelTimeSeconds: 9,
+    travelTimeSeconds: 7000,
     routeId: 1
   },
 
   {
     timepoint: '2019-11-15T13:59:22.296Z',
-    travelTimeSeconds: 846,
+    travelTimeSeconds: 8460,
     routeId: 1
   },
 

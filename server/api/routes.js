@@ -6,6 +6,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const routes = await Route.findAll()
+
     res.status(200).json(routes)
   } catch (err) {
     next(err)

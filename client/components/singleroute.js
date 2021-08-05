@@ -29,11 +29,30 @@ class SingleRoute extends React.Component {
     return (
       <div id="singleRoute">
         {route ? (
-          <div className="description-container">
+          <div
+            style={{marginTop: '40px', textAlign: 'center'}}
+            className="description-container"
+          >
             <form className="route-card">
-              <h3>Name of route:</h3>
-              <div>Name of start point: {route.start}</div>
-              <div>Name of endpoint: {route.end}</div>
+              <h3 style={{marginTop: '40px', textAlign: 'center'}}>
+                Your current location:
+              </h3>
+              <div>
+                <h2>
+                  <p>
+                    <b>From:</b>
+                  </p>
+                  {route.start}
+                </h2>
+              </div>
+              <div>
+                <h2>
+                  <p>
+                    <b>To:</b>
+                  </p>
+                  {route.end}
+                </h2>
+              </div>
               <button type="submit" onClick={this.handleDelete}>
                 Remove
               </button>

@@ -90,7 +90,7 @@ class Demo extends React.Component {
         <div>
           <div>
             {this.state.showAverageCommuteTime ? (
-              <div id="plot-container" className="rec">
+              <div id="plot-container" className="rec ">
                 <h1 className="graph">Max Commute from Philadelphia to NYC</h1>
                 <XYPlot
                   xType="ordinal"

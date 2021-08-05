@@ -5,56 +5,97 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
 import GoogleMap from '../components/map'
 import Demo from '../components/demo'
+import {BoxZoomHandler} from 'mapbox-gl'
 
 class Tutorial extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <h1> How Traffic Tracker works? </h1>
-          <h2>
-            Make decisions on long-term gathered data about the traffic and see
-            the real commute pattern. By using Traffic Tracker you can
-            conveniently and efficiently factor commute time into decisions like
-            home-buying or changing job.
-          </h2>
-          <p className="description">
-            Traffic Tracker gathers real-time traffic data for the added route.
-            It uses Google API to get the most recent changes in the traffic and
-            commute time. By tracking traffic over long period of time (e.g. 3
-            months), you can see traffic patterns on the added route. Data
-            analysis helps you to decrease the time spent in the traffic and
-            find the convenient commute window. It may help you decide whether
-            to buy a house and commute or rely on city public transport.
-          </p>
-          <GoogleMap />
-        </div>
-        <div>
-          {/* example for demo purposes Demo component no-login needed*/}
-          <Demo />
-          <h2>Adding route</h2>
-          <p className="description add-route-desc">
-            A logged in user can add route that will be tracked each day until
-            the route will be removed from the account. Tracking of user's route
-            starts immediately and real-time commute time sample is gathered
-            every 15 minutes. Each gathered sample is visible on the graph. One
-            graph shows all gathers samples, another one shows maximum commute
-            time for each day.
-          </p>
-          <div id="map">
-            <img
-              src="img/add_route_demo.png"
-              alt="add route view"
-              height="300"
-              width="400"
-            />
-          </div>
+        <section>
+          <img
+            style={{height: 'auto', maxWidth: '100%'}}
+            className="mySlides"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Painted_Ladies_San_Francisco_January_2013_panorama_2.jpg/2880px-Painted_Ladies_San_Francisco_January_2013_panorama_2.jpg"
+          />
+        </section>
 
-          <h2>Summary on Email</h2>
-          <p className="description">
-            User can subscribe and get a summary of the gathered data.
+        <section className="w3-container w3-center w3-content">
+          <h2 className="w3-wide">Find the best location for a new home!</h2>
+          <p className="w3-opacity">
+            <i>We value your time</i>
           </p>
-        </div>
+          <p className="w3-justify main-description">
+            Make a home buying decision even more simpler. With TraficTracker
+            you will see how much time you have to spent in traffic when you
+            travel from your a new house to work or to a favourite gym.
+            Everything in 3 steps. You will get an evaluation after 2 weeks!
+          </p>
+        </section>
+
+        <section className="w3-row-padding w3-center w3-light-grey">
+          {[
+            {
+              title: 'Find your dream house location',
+              icon: 'home',
+              class: 'material-icons',
+              img: './img/demo_route_rs.png',
+              description:
+                'I found a nice house in Philadelphia, but how long would it take me to go from my new home to my work?'
+            },
+            {
+              title:
+                'Add your current location and a point on a map for tracking',
+              icon: 'add_circle_outline',
+              class: 'material-icons',
+              img: './img/add_route.png',
+              description:
+                'It only takes 1 hr and 30 minutes to my dream house in Philadelphia from Times Square. But it is 4 am in the morning. I want to have a commute pattern in long term.'
+            },
+            {
+              title: 'Log into account and get results!',
+              icon: 'playlist_add_check',
+              class: 'material-icons',
+              img: './img/add_route.png',
+              description:
+                'After two weeks get a generated report on commute pattern for a chosen location.'
+            }
+          ].map((el, indx) => (
+            <article key={indx} className="w3-third box-card">
+              <div className="step-icon">
+                <div className="w3-third box-card-inner">
+                  {' '}
+                  <i
+                    style={{width: '40px', fontSize: '50px'}}
+                    className="material-icons"
+                  >
+                    {el.icon}
+                  </i>
+                  <p className="box-item title-box"> {el.title}</p>
+                  <img
+                    src={el.img}
+                    style={{width: '350px'}}
+                    alt="Random Name"
+                  />
+                  <p className="step-description">{el.description}</p>
+                  <div
+                    className="watch-demo"
+                    style={{marginTop: '4px', fontSize: '16px'}}
+                  >
+                    <div
+                      className="watch-demo-container"
+                      onClick={() => console.log('watch video')}
+                    >
+                      <span>Watch demo </span>
+                      <i style={{fontWeight: 700}} className="material-icons">
+                        play_circle_outline
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </section>
       </div>
     )
   }

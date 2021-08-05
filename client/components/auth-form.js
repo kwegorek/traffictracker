@@ -3,12 +3,15 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 let traffic_back =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mZVVLVbddJc1EDouq7D9o5F60FNPEch4CUugn9xJ88u1t4Tv&s'
 
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+
+  const history = useHistory()
 
   return (
     <div className="login-wrapper">
@@ -32,7 +35,9 @@ const AuthForm = props => {
             </div>
             {error && error.response && <div> {error.response.data} </div>}
           </form>
-          <Link to="/auth/google">{displayName} with Google</Link>
+          <button onClick={() => history.push('/auth/google')}>
+            {displayName} with Google
+          </button>
         </div>
       </div>
     </div>

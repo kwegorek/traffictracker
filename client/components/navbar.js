@@ -7,41 +7,50 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn, email}) => {
   return (
     <div>
-      <nav>
+      <nav className="w3-bar w3-black navbar-container">
         {isLoggedIn ? (
           <div>
-            {/* The navbar will show these links after you log in */}
-            <Link className="nav" to="/home">
-              Get started
-            </Link>
-            <Link className="nav" to="/allroutes">
-              All user routes
-            </Link>
-            <a className=" nav" href="#" onClick={handleClick}>
-              Logout
-            </a>
-
-            <a className="name-nav nav" href="#">
+            <a className=" w3-bar-item navbaritem-welcome navitem" href="#">
               {`Welcome, ${email}`}
             </a>
+
+            <a
+              className="w3-button w3-bar-item navbaritem-right responsive-logout-icon"
+              href="#"
+              onClick={handleClick}
+            >
+              <img style={{width: '40px'}} src="./img/logout_icon.png" />
+            </a>
+
+            <Link
+              className="w3-button w3-bar-item navbaritem-right navitem"
+              to="/allroutes"
+            >
+              My routes
+            </Link>
+            <Link
+              className="w3-button w3-bar-item navbaritem-right navitem"
+              to="/home"
+            >
+              Get started
+            </Link>
           </div>
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
 
-            <Link className="nav" to="/tutorial">
+            <Link className="w3-button w3-bar-item" to="/tutorial">
               Get started
             </Link>
-            <Link className="nav" to="/login">
+            <Link className="w3-button w3-bar-item" to="/login">
               Login
             </Link>
-            <Link className="nav" to="/signup">
+            <Link className="w3-button w3-bar-item" to="/signup">
               Sign Up
             </Link>
           </div>
         )}
       </nav>
-      <hr />
     </div>
   )
 }

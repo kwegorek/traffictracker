@@ -2,29 +2,25 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const Footer = () => (
-  <footer className="footer">
-    <ul id="footer-menu" className="footer-menu">
-      <li className="menu-item items-footer">
-        <Link className="contact-us" to="#">
-          CONTACT
-        </Link>
-      </li>
-      <li className="menu-item items-footer">
-        <Link className="privacy-policy" to="#">
-          PRIVACY POLICY
-        </Link>
-      </li>
-      <li className="menu-item items-footer">
-        <Link className="terms of use" to="#">
-          TERMS OF USE
-        </Link>
-      </li>
-      <li className="menu-item items-footer">
-        <Link className="community rules" to="#">
-          COMMUNITY RULES
-        </Link>
-      </li>
-    </ul>
+  <footer className="w3-container w3-padding-64 w3-center w3-black w3-xlarge footerlinks ">
+    <a href="#">
+      <i className="fa fa-facebook-official" />
+    </a>
+    <a href="#">
+      <i className="fa fa-pinterest-p" />
+    </a>
+    <a href="#">
+      <i className="fa fa-twitter" />
+    </a>
+    <a href="#">
+      <i className="fa fa-flickr" />
+    </a>
+    <a href="#">
+      <i className="fa fa-linkedin" />
+    </a>
+    {/* <p className="w3-medium">
+  Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </p> */}
   </footer>
 )
 

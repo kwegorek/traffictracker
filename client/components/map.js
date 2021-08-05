@@ -40,7 +40,7 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <div id="map">
-        <img src="img/demo_route.png" alt="Map" height="500" width="1000" />
+        <img src="img/demo_route.png" alt="Map" height="650" />
       </div>
     )
   }
