@@ -14,7 +14,6 @@ let destination = 'ChIJcwPEodjh5YkRPEKrXqApeCM'
 //To: Mystic Aquarium, Coogan Boulevard, Mystic, Connecticut, USA
 
 async function fetchTravelTime() {
-  db.sync({force: true})
   const today = new Date(Date.now())
   try {
     axios
