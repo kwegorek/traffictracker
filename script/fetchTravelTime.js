@@ -12,7 +12,9 @@ async function fetchTravelTime() {
   try {
     axios
       .get(
-        'https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:EiFIb3l0IEF2ZSBTLCBRdWVlbnMsIE5ZIDExMTAyLCBVU0EiLiosChQKEgkFFzxHRF_CiRGVwYvSrucNdhIUChIJU6W15zZfwokRDhGErMSvCpw&destinations=place_id:ChIJU6W15zZfwokRDhGErMSvCpw&departure_time=now&key=AIzaSyDAYHekVLQMmbjpt_GCCbmSeT_HOVXF6c0',
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:EiFIb3l0IEF2ZSBTLCBRdWVlbnMsIE5ZIDExMTAyLCBVU0EiLiosChQKEgkFFzxHRF_CiRGVwYvSrucNdhIUChIJU6W15zZfwokRDhGErMSvCpw&destinations=place_id:ChIJU6W15zZfwokRDhGErMSvCpw&departure_time=now&key=${
+          process.env.GOOGLE_DISTANCE_API_KEY
+        }`,
         {
           headers: {'Access-Control-Allow-Origin': '*'},
           responseType: 'json'
@@ -33,7 +35,6 @@ async function fetchTravelTime() {
       })
   } catch (err) {
     console.log('')
-    
   }
 }
 
