@@ -1,7 +1,7 @@
 const User = require('./user')
 const Route = require('./route')
 const TrafficSample = require('./trafficsample')
-const DemoDistance = require('./demodistance')
+const DemoDistance = require('./distancesample')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
