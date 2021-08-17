@@ -27,7 +27,6 @@ async function fetchTravelTime() {
         }
       )
       .then(response => {
-        console.log(response, 'repsonse ----ft')
         let getTime = response.data.rows[0]
 
         let getTimeMinText = getTime.elements[0].duration_in_traffic.text
@@ -52,7 +51,6 @@ async function runFetchTravelTime() {
   } catch (err) {
     console.log(err)
     console.error(err)
-    process.exitCode = 1
   } finally {
     console.log('')
     return
