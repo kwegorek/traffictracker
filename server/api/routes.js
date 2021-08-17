@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body, '------------------->')
     const post_route = await Route.create(req.body)
 
     res.status(200).json(post_route)

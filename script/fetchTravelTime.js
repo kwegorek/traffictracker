@@ -4,15 +4,21 @@ const db = require('../server/db')
 const {DemoDistance} = require('../server/db/models')
 var distance = require('google-distance')
 const axios = require('axios')
-
+require('dotenv').config('./env')
 distance.apiKey = process.env.GOOGLE_DISTANCE_API_KEY
+
+let origin = 'ChIJ4zGFAZpYwokRGUGph3Mf37k'
+let destination = 'ChIJcwPEodjh5YkRPEKrXqApeCM'
+
+//From Central
+//To: Mystic Aquarium, Coogan Boulevard, Mystic, Connecticut, USA
 
 async function fetchTravelTime() {
   const today = new Date(Date.now())
   try {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:EiFIb3l0IEF2ZSBTLCBRdWVlbnMsIE5ZIDExMTAyLCBVU0EiLiosChQKEgkFFzxHRF_CiRGVwYvSrucNdhIUChIJU6W15zZfwokRDhGErMSvCpw&destinations=place_id:ChIJU6W15zZfwokRDhGErMSvCpw&departure_time=now&key=${
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:${origin}&destinations=place_id:${destination}&departure_time=now&key=${
           process.env.GOOGLE_DISTANCE_API_KEY
         }`,
         {
@@ -21,6 +27,7 @@ async function fetchTravelTime() {
         }
       )
       .then(response => {
+        console.log(response, 'repsonse ----ft')
         let getTime = response.data.rows[0]
 
         let getTimeMinText = getTime.elements[0].duration_in_traffic.text
