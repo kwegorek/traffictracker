@@ -18,7 +18,7 @@
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "generate-seed-data": "node script/generateDummyData.js > script/dummyData.js",
-    "fetch-travel-time": "NODE_ENV='development' node script/fetchTravelTime.js",
+    "fetch-travel-time": "node script/fetchTravelTime.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",

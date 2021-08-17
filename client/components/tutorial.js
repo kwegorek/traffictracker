@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {displayTrafficSamples} from '../store/trafficsample'
 import GoogleMap from '../components/map'
-import Demo from '../components/demo'
+import DemoDistance from '../components/demodistance'
 import {BoxZoomHandler} from 'mapbox-gl'
 
 class Tutorial extends React.Component {
@@ -55,7 +55,7 @@ class Tutorial extends React.Component {
               title: 'Log into account and get results!',
               icon: 'playlist_add_check',
               class: 'material-icons',
-              img: './img/add_route.png',
+              img: './img/loginscreen.png',
               description:
                 'After two weeks get a generated report on commute pattern for a chosen location.'
             }
@@ -73,7 +73,7 @@ class Tutorial extends React.Component {
                   <p className="box-item title-box"> {el.title}</p>
                   <img
                     src={el.img}
-                    style={{width: '350px'}}
+                    style={{width: '280px'}}
                     alt="Random Name"
                   />
                   <p className="step-description">{el.description}</p>
@@ -85,7 +85,11 @@ class Tutorial extends React.Component {
                       className="watch-demo-container"
                       onClick={() => console.log('watch video')}
                     >
-                      <span>Watch demo </span>
+                      <span>
+                        <a style={{color: 'black'}} href="#live-demo">
+                          Try demo{' '}
+                        </a>
+                      </span>
                       <i style={{fontWeight: 700}} className="material-icons">
                         play_circle_outline
                       </i>
@@ -96,6 +100,9 @@ class Tutorial extends React.Component {
             </article>
           ))}
         </section>
+        <div id="live-demo" className="demodistance-container">
+          <DemoDistance />
+        </div>
       </div>
     )
   }

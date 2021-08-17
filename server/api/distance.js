@@ -4,7 +4,7 @@
 // const distance = require('google-distance')
 // // module.exports = router
 
-// distance.apiKey = 'AIzaSyB6ZqwIAn94sreynAfVzlypSg05hQzkjX8'
+// distance.apiKey = process.env.GOOGLE_DISTANCE_API_KEY
 
 // // router.get('/', async (req, res, next) => {
 // //     try {

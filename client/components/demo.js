@@ -103,6 +103,7 @@ class Demo extends React.Component {
 
                   <YAxis
                     title="time in min"
+                    tickLabelAngle={-90}
                     tickFormat={sec => this.myFormatterY(sec)}
                   />
 

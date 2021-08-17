@@ -1,87 +1,43 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Route, TrafficSample} = require('../server/db/models')
-const {users, routes, trafficsamples} = require('./dummyData')
-
+const {DemoDistance} = require('../server/db/models')
 var distance = require('google-distance')
-
-if (process.env.NODE_ENV !== 'production') require('../secrets')
+const axios = require('axios')
 
 distance.apiKey = process.env.GOOGLE_DISTANCE_API_KEY
 
 async function fetchTravelTime() {
-  await db.sync()
+  const today = new Date(Date.now())
+  try {
+    axios
+      .get(
+        'https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:EiFIb3l0IEF2ZSBTLCBRdWVlbnMsIE5ZIDExMTAyLCBVU0EiLiosChQKEgkFFzxHRF_CiRGVwYvSrucNdhIUChIJU6W15zZfwokRDhGErMSvCpw&destinations=place_id:ChIJU6W15zZfwokRDhGErMSvCpw&departure_time=now&key=AIzaSyDAYHekVLQMmbjpt_GCCbmSeT_HOVXF6c0',
+        {
+          headers: {'Access-Control-Allow-Origin': '*'},
+          responseType: 'json'
+        }
+      )
+      .then(response => {
+        let getTime = response.data.rows[0]
 
-  let routes = await Route.findAll()
-  let samples = routes.map(async route => {
-    const plainRoute = route.get({plain: true})
-    const ret = distance.get(
-      {
-        origins: [plainRoute.start],
-        destinations: [plainRoute.end]
-      },
-      async function(err, data) {
-        if (err) return console.log(err)
-        console.log(data)
-        await TrafficSample.create({
-          routeId: route.id,
-          travelTimeSeconds: data[0].durationValue
+        let getTimeMinText = getTime.elements[0].duration_in_traffic.text
+        let getTimeSecValue = getTime.elements[0].duration_in_traffic.value
+        db.sync()
+
+        DemoDistance.create({
+          minTimeSecText: getTimeMinText,
+          timeSecValue: getTimeSecValue,
+          date: today
         })
-      }
-    )
-    console.log('-->google api ', ret)
-    return ret
-    // return TrafficSample.create({
-    //   travelTimeSeconds: 1000,
-    //   routeId: route.id
-    // })
-    //return route.setTrafficsamples([trafficsample])
-  })
-  return Promise.all(samples).then(oneNewSampleForEachRoute => {
-    console.log(oneNewSampleForEachRoute)
-  })
+      })
+  } catch (err) {
+    console.log('')
+    
+  }
 }
-// console.log(fetchedRoutes)
-// console.log("11", await Promise.all([future]))
 
-// console.log("--",samples)
-// samples.forEach(sample => console.log(sample.get({plain:true})))
-// const plainRoute = route.get({plain: true})
-// return 1
-// console.log('-->', route)
-
-// console.log("--->1")
-// const trafficsample = TrafficSample.build(  {
-//   timepoint: new Date().toUTCString(),
-//   travelTimeSeconds: 1000
-// })
-// console.log("--->2", trafficsample.get({plain: true}))
-//  route.setTrafficsamples([trafficsample])
-// console.log("--->3")
-
-//   distance.get(
-//     {
-//       origins: [plainRoute.start],
-//       destinations: [plainRoute.end]
-//     },
-//     async function(err, data) {
-//       if (err) return console.log(err)
-//       console.log(data)
-//       const trafficsample = await TrafficSample.create(  {
-//         timepoint: new Date().toUTCString,
-//         travelTimeSeconds: data[0].durationValue
-//       })
-//       await route.setTrafficsamples([trafficsample])
-//         console.log("Saved!!", trafficsample.get({plain: true}))
-//     }
-//   )
-
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runFetchTravelTime() {
-  console.log('fetching travel times for all routes...')
   try {
     await fetchTravelTime()
     console.log('end')
@@ -90,9 +46,8 @@ async function runFetchTravelTime() {
     console.error(err)
     process.exitCode = 1
   } finally {
-    console.log('closing db connection')
-    //await db.close()
-    console.log('db connection closed')
+    console.log('')
+    return
   }
 }
 

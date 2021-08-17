@@ -38,14 +38,22 @@ const Navbar = ({handleClick, isLoggedIn, email}) => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-
-            <Link className="w3-button w3-bar-item" to="/tutorial">
+            <Link
+              className="w3-button w3-bar-item navbaritem-right navitem"
+              to="/tutorial"
+            >
               Get started
             </Link>
-            <Link className="w3-button w3-bar-item" to="/login">
+            <Link
+              className="w3-button w3-bar-item navbaritem-right navitem"
+              to="/login"
+            >
               Login
             </Link>
-            <Link className="w3-button w3-bar-item" to="/signup">
+            <Link
+              className="w3-button w3-bar-item navbaritem-right navitem"
+              to="/signup"
+            >
               Sign Up
             </Link>
           </div>

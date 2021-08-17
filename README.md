@@ -48,17 +48,56 @@ createdb traffictracker-test
 
 * By default, running `npm test` will use `traffictracker-test`, while
   regular development uses `traffictracker`
-* Create a file called `secrets.js` in the project root
+* Create a file called `.env` in the project root
   * This file is listed in `.gitignore` and put there your own API KEYS
 
 ```
-process.env.GOOGLE_CLIENT_ID = 'hush hush'
-process.env.GOOGLE_CLIENT_SECRET = 'pretty secret'
-process.env.GOOGLE_CALLBACK = '/auth/google/callback'
-process.env.GOOGLE_DISTANCE_API_KEY = 'YOUR_API_KEY'
+GOOGLE_CLIENT_ID = 'hush hush'
+GOOGLE_CLIENT_SECRET = 'pretty secret'
+GOOGLE_CALLBACK = '/auth/google/callback'
+GOOGLE_DISTANCE_API_KEY = 'YOUR_API_KEY'
 ```
 
-### Google distance API
+### Google Place ID Geocoder && Distance Matrix API
+
+Google place id geocoder: https://developers.google.com/maps/documentation/javascript/examples/places-placeid-geocoder
+
+The Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The API returns information based on the recommended route between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+
+## API response:
+
+https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:EiFIb3l0IEF2ZSBTLCBRdWVlbnMsIE5ZIDExMTAyLCBVU0EiLiosChQKEgkFFzxHRF_CiRGVwYvSrucNdhIUChIJU6W15zZfwokRDhGErMSvCpw&destinations=place_id:ChIJU6W15zZfwokRDhGErMSvCpw&departure_time=now&key=API_KEY
+
+{
+"destination_addresses": [
+"Astoria, Queens, NY, USA"
+],
+"origin_addresses": [
+"Hoyt Ave S, Queens, NY 11102, USA"
+],
+"rows": [
+{
+"elements": [
+{
+"distance": {
+"text": "1.1 km",
+"value": 1114
+},
+"duration": {
+"text": "5 mins",
+"value": 325
+},
+"duration_in_traffic": {
+"text": "6 mins",
+"value": 376
+},
+"status": "OK"
+}
+]
+}
+],
+"status": "OK"
+}
 
 ### OAuth
 

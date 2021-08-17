@@ -1,6 +1,7 @@
 const User = require('./user')
 const Route = require('./route')
 const TrafficSample = require('./trafficsample')
+const DemoDistance = require('./demodistance')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -23,5 +24,6 @@ Route.hasMany(TrafficSample)
 module.exports = {
   User,
   Route,
-  TrafficSample
+  TrafficSample,
+  DemoDistance
 }
