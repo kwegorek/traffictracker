@@ -1,11 +1,12 @@
+import GoogleMap from '../components/map'
+import {BoxZoomHandler} from 'mapbox-gl'
 /* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import {displayTrafficSamples} from '../store/trafficsample'
-import GoogleMap from '../components/map'
+import {Route, Switch, withRouter} from 'react-router-dom'
+
 import DemoDistance from '../components/demodistance'
-import {BoxZoomHandler} from 'mapbox-gl'
+import {displayTrafficSamples} from '../store/trafficsample'
 
 class Tutorial extends React.Component {
   render() {
@@ -27,8 +28,8 @@ class Tutorial extends React.Component {
           <p className="w3-justify main-description">
             Make a home buying decision even more simpler. With TraficTracker
             you will see how much time you have to spent in traffic when you
-            travel from your a new house to work or to a favourite gym.
-            Everything in 3 steps. You will get an evaluation after 2 weeks!
+            travel from your new house to work or to a favourite gym. Everything
+            in 3 steps. You will get an evaluation after 2 weeks!
           </p>
         </section>
 
