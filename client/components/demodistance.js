@@ -1,10 +1,8 @@
 /* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import {displayTrafficSamples} from '../store/trafficsample'
+import { withRouter } from 'react-router-dom';
 import {getOneTimePoint} from '../store/demo'
-import GoogleMap from './map'
 const axios = require('axios')
 
 import {
@@ -13,25 +11,18 @@ import {
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
-  HorizontalBarSeries,
   DiscreteColorLegend,
   Highlight,
-  LineSeries,
   makeWidthFlexible,
   LineMarkSeries,
-  DecorativeAxis,
-  ChartLabel,
-  Borders,
-  VerticalBarSeries,
-  LineLineSeries
-} from 'react-vis'
+} from 'react-vis';
 
 const FlexibleXYPlot = makeWidthFlexible(XYPlot)
 
 const ITEMS = [
   {
     title:
-      'Traffic pattern at given point of the day. Each sample gatherd every 15 minutes.',
+      'Traffic pattern at given point of the day. Each sample gathered every 15 minutes.',
     color: '#6742ca7a',
     stroke: '#fff',
     strokeWidth: 3
@@ -113,8 +104,7 @@ class DemoDistance extends React.Component {
         <div className="live-demo-container">
           <h1>Try live demo</h1>
           <h3 className="live-demo-description-container">
-            Click submit to gather traffic data for the set location. You have
-            to be logged in to submit your own location.
+            Click submit to display traffic data for a demo location.
           </h3>
         </div>
 

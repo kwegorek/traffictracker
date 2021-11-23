@@ -29,8 +29,8 @@
 //     //       destination: 'hrllo'
 //     //     },
 //     //     function(err, data) {
-//     //       if (err) return console.log(err, '----------error');
-//     //       console.log(data);
+//     //       if (err) return //console.log(err, '----------error');
+//     //       //console.log(data);
 //     //   });
 
 //       const post_route = await Route.create(route)

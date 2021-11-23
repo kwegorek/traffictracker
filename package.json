@@ -1,7 +1,7 @@
 {
   "name": "traffictracker",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Application for tracking traffic",
   "engines": {
     "node": ">=14.5.0"
   },

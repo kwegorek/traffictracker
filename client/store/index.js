@@ -9,11 +9,15 @@ import demo from './demo'
 
 const reducer = combineReducers({user, routes, trafficsample, demo})
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+  applyMiddleware(thunkMiddleware)
 )
+
+// const middleware = composeWithDevTools(
+//   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+// )
 const store = createStore(reducer, middleware)
 
-console.log(store)
+//console.log(store)
 
 export default store
 export * from './user'

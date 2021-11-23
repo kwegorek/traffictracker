@@ -8,7 +8,7 @@ router.get('/:routeid', async (req, res, next) => {
     const trafficSamples = await TrafficSample.findAll({
       where: {routeId: req.params.routeid}
     })
-    console.log('api db', trafficSamples)
+    //console.log('api db', trafficSamples)
     res.send(trafficSamples)
   } catch (err) {
     next(err)

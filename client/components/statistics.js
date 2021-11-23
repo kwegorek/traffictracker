@@ -68,9 +68,9 @@ class Statistics extends React.Component {
   }
 
   myFormatterMax = v => {
-    // console.log('v----------------->', Math.abs(Math.round(v)))
-    // console.log(this.props.maxTime, 'maxtime')
-    // console.log('v----------------->', this.props.maxTime[Math.abs(Math.floor(v))].timepoint)
+    // //console.log('v----------------->', Math.abs(Math.round(v)))
+    // //console.log(this.props.maxTime, 'maxtime')
+    // //console.log('v----------------->', this.props.maxTime[Math.abs(Math.floor(v))].timepoint)
     // // return (
     // //   new Date(this.props.samples[Math.round(v)].timepoint)
     // //     .toISOString()
@@ -84,7 +84,7 @@ class Statistics extends React.Component {
   }
 
   myFormatter(v) {
-    console.log(v, 'v')
+    //console.log(v, 'v')
     return (
       new Date(this.props.samples[Math.round(v)].timepoint)
         .toISOString()

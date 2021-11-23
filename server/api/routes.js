@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log('--[[[[[---req.params.id--', req.params.id)
+    //console.log('--[[[[[---req.params.id--', req.params.id)
 
     const one_routes = await Route.findByPk(req.params.id)
 
@@ -36,12 +36,12 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
-  console.log(req.params.id, 'delete')
+  //console.log(req.params.id, 'delete')
   try {
     const routetodelete = await Route.findByPk(req.params.id)
 
     await routetodelete.destroy()
-    console.log(routetodelete, 'routetodelete')
+    //console.log(routetodelete, 'routetodelete')
 
     res.json(routetodelete)
   } catch (err) {

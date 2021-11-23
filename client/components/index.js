@@ -12,5 +12,5 @@ export {default as SingleRoute} from './singleroute'
 export {default as RouteView} from './routeview'
 export {default as Tutorial} from './tutorial'
 
-export {default as GoogleMap} from './map'
+
 export {Login, Signup} from './auth-form'

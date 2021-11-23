@@ -9,7 +9,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll()
-    console.log(users, 'users')
+    //console.log(users, 'users')
     res.status(200).json(users)
   } catch (err) {
     next(err)
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 //get all routes for a user
 router.get('/:id/allroutes', async (req, res, next) => {
   try {
-    // console.log(req.session.passport.user, '----sessionUserId')
+    // //console.log(req.session.passport.user, '----sessionUserId')
     const routes = await Route.findAll({
       where: {userId: req.body.id}
     })

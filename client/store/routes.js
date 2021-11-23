@@ -49,7 +49,7 @@ export const displayOneRoute = id => async dispatch => {
 export const addRouteThunk = route => async dispatch => {
   try {
     const {data} = await axios.post('/api/routes', route)
-    console.log('Thunk, route added')
+    //console.log('Thunk, route added')
     dispatch(addRoute(data))
   } catch (error) {
     console.error(error)
@@ -59,7 +59,7 @@ export const addRouteThunk = route => async dispatch => {
 export const deleteRouteThunk = routeid => async dispatch => {
   try {
     const {data} = await axios.delete(`/api/routes/${routeid}`)
-    console.log('Thunk, delete one', data)
+    //console.log('Thunk, delete one', data)
 
     dispatch(deleteRoute(routeid))
   } catch (err) {
@@ -90,4 +90,4 @@ export default function(state = initialState, action) {
   }
 }
 
-console.log(initialState, 'initialState')
+//console.log(initialState, 'initialState')

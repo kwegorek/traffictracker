@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
         }
       )
       .then(response => {
-        console.log(response, 'response')
+        //console.log(response, 'response')
         let getTime = response.data.rows[0]
 
         let getTimeMinText = getTime.elements[0].duration_in_traffic.text

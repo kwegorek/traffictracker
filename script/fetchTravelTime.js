@@ -40,19 +40,19 @@ async function fetchTravelTime() {
         })
       })
   } catch (err) {
-    console.log('')
+    //console.log('')
   }
 }
 
 async function runFetchTravelTime() {
   try {
     await fetchTravelTime()
-    console.log('end')
+    //console.log('end')
   } catch (err) {
-    console.log(err)
+    //console.log(err)
     console.error(err)
   } finally {
-    console.log('')
+    //console.log('')
     return
   }
 }

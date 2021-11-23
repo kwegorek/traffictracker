@@ -1,4 +1,4 @@
-console.log(`const users = [
+//console.log(`const users = [
   {
     id: 1,
     firstName: 'Joe',
@@ -32,18 +32,18 @@ function addMinutes(minutes) {
   const date = new Date()
   return new Date(date.setMinutes(date.getMinutes() + minutes))
 }
-console.log('const trafficsamples = [')
+//console.log('const trafficsamples = [')
 for (let i = 0; i < 100; ++i) {
   const timespent = Math.round(Math.abs(Math.sin(i) * 1000))
   const timepoint = addMinutes(i * 15).toISOString()
 
-  console.log(`
+  //console.log(`
   {
     timepoint: '${timepoint}',
     travelTimeSeconds: ${timespent},
     routeId: 1
   },`)
 }
-console.log(']')
-console.log('')
-console.log('module.exports = {trafficsamples, routes, users}')
+//console.log(']')
+//console.log('')
+//console.log('module.exports = {trafficsamples, routes, users}')

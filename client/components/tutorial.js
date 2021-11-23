@@ -1,9 +1,8 @@
-import GoogleMap from '../components/map'
-import {BoxZoomHandler} from 'mapbox-gl'
+
 /* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
-import {Route, Switch, withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 import DemoDistance from '../components/demodistance'
 import {displayTrafficSamples} from '../store/trafficsample'
@@ -23,13 +22,12 @@ class Tutorial extends React.Component {
         <section className="w3-container w3-center w3-content">
           <h2 className="w3-wide">Find the best location for a new home!</h2>
           <p className="w3-opacity">
-            <i>We value your time</i>
+            <i>Value your time</i>
           </p>
-          <p className="w3-justify main-description">
-            Make a home buying decision even more simpler. With TraficTracker
-            you will see how much time you have to spent in traffic when you
-            travel from your new house to work or to a favourite gym. Everything
-            in 3 steps. You will get an evaluation after 2 weeks!
+          <p className="w3-justify-center main-description">
+            With TrafficTracker
+            you will see how much time over a month you may spend on commute eg. from
+            a new house to work. On a graph you may check in details how traffic changes during a day. 
           </p>
         </section>
 
@@ -84,7 +82,7 @@ class Tutorial extends React.Component {
                   >
                     <div
                       className="watch-demo-container"
-                      onClick={() => console.log('watch video')}
+                      onClick={() => console.log('')}
                     >
                       <span>
                         <a style={{color: 'black'}} href="#live-demo">
@@ -101,6 +99,7 @@ class Tutorial extends React.Component {
             </article>
           ))}
         </section>
+      
         <div id="live-demo" className="demodistance-container">
           <DemoDistance />
         </div>

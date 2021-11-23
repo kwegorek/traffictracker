@@ -1,9 +1,10 @@
 /* eslint-disable react/void-dom-elements-no-children */
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
 import RouteView from '../components/routeview'
-import {displayRoutes, addRouteThunk} from '../store/routes'
-import {me} from '../store/user'
+import { addRouteThunk, displayRoutes } from '../store/routes'
+import { me } from '../store/user'
 
 class AllRoutes extends React.Component {
   constructor() {
@@ -45,7 +46,7 @@ class AllRoutes extends React.Component {
   render() {
     let propsUserId = this.props.user.id
     let routes = this.props.routes
-    console.log(routes, 'routes')
+    //console.log(routes, 'routes')
     let filteredRoutes = routes.filter(route => route.userId === propsUserId)
 
     return (
